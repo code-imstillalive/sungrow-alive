@@ -98,3 +98,7 @@ and Kenney's Car Kit (CC0).
 ## Licence
 
 MIT. See [LICENSE](LICENSE).
+
+Bundled third-party files keep their own licences, which sit beside them:
+three.js in `custom_components/sungrow_sh_t/www/vendor/` (MIT) and Kenney's Car Kit in
+`custom_components/sungrow_sh_t/www/models/` (CC0).
