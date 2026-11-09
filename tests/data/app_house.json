@@ -1,0 +1,3202 @@
+{
+ "title": "Sungrow",
+ "views": [
+  {
+   "title": "Sungrow",
+   "path": "app",
+   "icon": "mdi:solar-power-variant",
+   "type": "panel",
+   "cards": [
+    {
+     "type": "custom:sungrow-app",
+     "title": "Sungrow",
+     "pages": [
+      {
+       "id": "overview",
+       "title": "Overview",
+       "subtitle": "Live power through the house",
+       "cards": [
+        {
+         "type": "custom:sungrow-flow-card",
+         "needs": "sensor.sungrow_logger_battery_level",
+         "pv": [
+          "sensor.sungrow_inverter_1_pv_power",
+          "sensor.sungrow_inverter_2_pv_power"
+         ],
+         "home": "sensor.sungrow_logger_load_power",
+         "grid": "sensor.sungrow_logger_grid_power",
+         "battery": "sensor.sungrow_logger_battery_power",
+         "soc": "sensor.sungrow_logger_battery_level",
+         "towers": [
+          "sensor.sungrow_battery_tower_1_battery_level",
+          "sensor.sungrow_battery_tower_2_battery_level",
+          "sensor.sungrow_battery_tower_3_battery_level",
+          "sensor.sungrow_battery_tower_4_battery_level"
+         ],
+         "mode": "select.sungrow_logger_ems_mode"
+        },
+        {
+         "type": "custom:sungrow-day-card"
+        },
+        {
+         "type": "custom:sungrow-matrix-card",
+         "layout": [
+          [
+           {
+            "span": 2,
+            "groups": [
+             {
+              "title": "Inverters",
+              "rows": [
+               {
+                "label": "State",
+                "entities": [
+                 "sensor.sungrow_inverter_1_running_state",
+                 "sensor.sungrow_inverter_2_running_state"
+                ]
+               },
+               {
+                "label": "EMS mode",
+                "entities": [
+                 "select.sungrow_inverter_1_ems_mode",
+                 "select.sungrow_inverter_2_ems_mode"
+                ]
+               },
+               {
+                "label": "Solar",
+                "entities": [
+                 "sensor.sungrow_inverter_1_pv_power",
+                 "sensor.sungrow_inverter_2_pv_power"
+                ],
+                "bar": true
+               },
+               {
+                "label": "Battery",
+                "entities": [
+                 "sensor.sungrow_inverter_1_battery_power",
+                 "sensor.sungrow_inverter_2_battery_power"
+                ]
+               },
+               {
+                "label": "Battery level",
+                "entities": [
+                 "sensor.sungrow_inverter_1_battery_level",
+                 "sensor.sungrow_inverter_2_battery_level"
+                ]
+               },
+               {
+                "label": "AC output",
+                "entities": [
+                 "sensor.sungrow_inverter_1_active_power",
+                 "sensor.sungrow_inverter_2_active_power"
+                ]
+               },
+               {
+                "label": "Temperature",
+                "entities": [
+                 "sensor.sungrow_inverter_1_inverter_temperature",
+                 "sensor.sungrow_inverter_2_inverter_temperature"
+                ]
+               }
+              ],
+              "color": "#F2A93B",
+              "columns": [
+               "Inverter 1",
+               "Inverter 2"
+              ]
+             }
+            ]
+           },
+           {
+            "span": 1,
+            "groups": [
+             {
+              "title": "Today",
+              "rows": [
+               {
+                "label": "Solar generated",
+                "entities": [
+                 "sensor.sungrow_inverter_1_daily_pv_generation",
+                 "sensor.sungrow_inverter_2_daily_pv_generation"
+                ],
+                "bar": true
+               },
+               {
+                "label": "House used",
+                "entities": [
+                 "sensor.sungrow_inverter_1_daily_consumed_energy",
+                 "sensor.sungrow_inverter_2_daily_consumed_energy"
+                ]
+               },
+               {
+                "label": "Imported",
+                "entities": [
+                 "sensor.sungrow_inverter_1_daily_import_energy",
+                 "sensor.sungrow_inverter_2_daily_import_energy"
+                ]
+               },
+               {
+                "label": "Exported",
+                "entities": [
+                 "sensor.sungrow_inverter_1_daily_export_energy",
+                 "sensor.sungrow_inverter_2_daily_export_energy"
+                ]
+               },
+               {
+                "label": "Battery charged",
+                "entities": [
+                 "sensor.sungrow_inverter_1_daily_battery_charge",
+                 "sensor.sungrow_inverter_2_daily_battery_charge"
+                ]
+               },
+               {
+                "label": "Battery discharged",
+                "entities": [
+                 "sensor.sungrow_inverter_1_daily_battery_discharge",
+                 "sensor.sungrow_inverter_2_daily_battery_discharge"
+                ]
+               },
+               {
+                "label": "AC output",
+                "entities": [
+                 "sensor.sungrow_inverter_1_daily_output_energy",
+                 "sensor.sungrow_inverter_2_daily_output_energy"
+                ]
+               }
+              ],
+              "color": "#9B87F5",
+              "columns": [
+               "Inverter 1",
+               "Inverter 2"
+              ]
+             }
+            ]
+           },
+           {
+            "span": 1,
+            "groups": [
+             {
+              "title": "What each inverter is doing",
+              "rows": [
+               {
+                "label": "PV generating",
+                "entities": [
+                 "binary_sensor.sungrow_inverter_1_pv_generating",
+                 "binary_sensor.sungrow_inverter_2_pv_generating"
+                ]
+               },
+               {
+                "label": "Battery charging",
+                "entities": [
+                 "binary_sensor.sungrow_inverter_1_battery_charging",
+                 "binary_sensor.sungrow_inverter_2_battery_charging"
+                ]
+               },
+               {
+                "label": "Battery discharging",
+                "entities": [
+                 "binary_sensor.sungrow_inverter_1_battery_discharging",
+                 "binary_sensor.sungrow_inverter_2_battery_discharging"
+                ]
+               },
+               {
+                "label": "Powering loads",
+                "entities": [
+                 "binary_sensor.sungrow_inverter_1_powering_loads",
+                 "binary_sensor.sungrow_inverter_2_powering_loads"
+                ]
+               },
+               {
+                "label": "Exporting",
+                "entities": [
+                 "binary_sensor.sungrow_inverter_1_exporting_power",
+                 "binary_sensor.sungrow_inverter_2_exporting_power"
+                ]
+               },
+               {
+                "label": "Importing",
+                "entities": [
+                 "binary_sensor.sungrow_inverter_1_importing_power",
+                 "binary_sensor.sungrow_inverter_2_importing_power"
+                ]
+               },
+               {
+                "label": "Loads generating",
+                "entities": [
+                 "binary_sensor.sungrow_inverter_1_loads_generating",
+                 "binary_sensor.sungrow_inverter_2_loads_generating"
+                ]
+               }
+              ],
+              "color": "#5B8DEF",
+              "columns": [
+               "Inverter 1",
+               "Inverter 2"
+              ]
+             }
+            ]
+           }
+          ]
+         ]
+        }
+       ]
+      },
+      {
+       "id": "solar",
+       "title": "Solar",
+       "subtitle": "Each inverter from panels to grid",
+       "cards": [
+        {
+         "type": "custom:sungrow-matrix-card",
+         "layout": [
+          [
+           {
+            "span": 4,
+            "groups": [
+             {
+              "title": "Solar now",
+              "kpis": [
+               {
+                "label": "Both inverters",
+                "digits": 2,
+                "sum": [
+                 "sensor.sungrow_inverter_1_pv_power",
+                 "sensor.sungrow_inverter_2_pv_power"
+                ],
+                "color": "#F2A93B"
+               },
+               {
+                "label": "Inverter 1",
+                "digits": 2,
+                "entity": "sensor.sungrow_inverter_1_pv_power"
+               },
+               {
+                "label": "Inverter 2",
+                "digits": 2,
+                "entity": "sensor.sungrow_inverter_2_pv_power"
+               },
+               {
+                "label": "Today, both",
+                "digits": 1,
+                "sum": [
+                 "sensor.sungrow_inverter_1_daily_pv_generation",
+                 "sensor.sungrow_inverter_2_daily_pv_generation"
+                ]
+               },
+               {
+                "label": "Inverter 1 today",
+                "digits": 1,
+                "entity": "sensor.sungrow_inverter_1_daily_pv_generation"
+               },
+               {
+                "label": "Inverter 2 today",
+                "digits": 1,
+                "entity": "sensor.sungrow_inverter_2_daily_pv_generation"
+               },
+               {
+                "label": "Inverter 1 lifetime",
+                "digits": 0,
+                "entity": "sensor.sungrow_inverter_1_total_pv_generation"
+               },
+               {
+                "label": "Inverter 2 lifetime",
+                "digits": 0,
+                "entity": "sensor.sungrow_inverter_2_total_pv_generation"
+               },
+               {
+                "label": "Inverter 1 solar limit",
+                "digits": 2,
+                "tones": {
+                 "Limit PV": "on",
+                 "Allow PV": "off"
+                },
+                "entity": "select.sungrow_inverter_1_pv_power_limitation"
+               },
+               {
+                "label": "Inverter 2 solar limit",
+                "digits": 2,
+                "tones": {
+                 "Limit PV": "on",
+                 "Allow PV": "off"
+                },
+                "entity": "select.sungrow_inverter_2_pv_power_limitation"
+               }
+              ],
+              "color": "#F2A93B"
+             }
+            ]
+           }
+          ],
+          [
+           {
+            "span": 2,
+            "groups": [
+             {
+              "title": "Inverter 1 · DC side",
+              "rows": [
+               {
+                "label": "Power",
+                "entities": [
+                 "sensor.sungrow_inverter_1_mppt1_power",
+                 "sensor.sungrow_inverter_1_mppt2_power",
+                 "sensor.sungrow_inverter_1_mppt3_power",
+                 "sensor.sungrow_inverter_1_string_1_power",
+                 "sensor.sungrow_inverter_1_string_2_power",
+                 "sensor.sungrow_inverter_1_string_3_power",
+                 "sensor.sungrow_inverter_1_string_4_power",
+                 "sensor.sungrow_inverter_1_string_5_power"
+                ],
+                "bar": true
+               },
+               {
+                "label": "Voltage",
+                "entities": [
+                 "sensor.sungrow_inverter_1_mppt1_voltage",
+                 "sensor.sungrow_inverter_1_mppt2_voltage",
+                 "sensor.sungrow_inverter_1_mppt3_voltage",
+                 "sensor.sungrow_inverter_1_string_1_voltage",
+                 "sensor.sungrow_inverter_1_string_2_voltage",
+                 "sensor.sungrow_inverter_1_string_3_voltage",
+                 "sensor.sungrow_inverter_1_string_4_voltage",
+                 "sensor.sungrow_inverter_1_string_5_voltage"
+                ]
+               },
+               {
+                "label": "Current",
+                "entities": [
+                 "sensor.sungrow_inverter_1_mppt1_current",
+                 "sensor.sungrow_inverter_1_mppt2_current",
+                 "sensor.sungrow_inverter_1_mppt3_current",
+                 "sensor.sungrow_inverter_1_string_1_current",
+                 "sensor.sungrow_inverter_1_string_2_current",
+                 "sensor.sungrow_inverter_1_string_3_current",
+                 "sensor.sungrow_inverter_1_string_4_current",
+                 "sensor.sungrow_inverter_1_string_5_current"
+                ]
+               }
+              ],
+              "color": "#F2A93B",
+              "dense": true,
+              "split_after": 3,
+              "columns": [
+               "MPPT 1",
+               "MPPT 2",
+               "MPPT 3",
+               "S1",
+               "S2",
+               "S3",
+               "S4",
+               "S5"
+              ]
+             },
+             {
+              "title": "Inverter 1 · AC output",
+              "rows": [
+               {
+                "label": "Power",
+                "entities": [
+                 "sensor.sungrow_inverter_1_phase_a_power",
+                 "sensor.sungrow_inverter_1_phase_b_power",
+                 "sensor.sungrow_inverter_1_phase_c_power"
+                ],
+                "bar": true
+               },
+               {
+                "label": "Voltage",
+                "entities": [
+                 "sensor.sungrow_inverter_1_phase_a_voltage",
+                 "sensor.sungrow_inverter_1_phase_b_voltage",
+                 "sensor.sungrow_inverter_1_phase_c_voltage"
+                ]
+               },
+               {
+                "label": "Current",
+                "entities": [
+                 "sensor.sungrow_inverter_1_phase_a_current",
+                 "sensor.sungrow_inverter_1_phase_b_current",
+                 "sensor.sungrow_inverter_1_phase_c_current"
+                ]
+               }
+              ],
+              "color": "#5B8DEF",
+              "dense": true,
+              "columns": [
+               "A",
+               "B",
+               "C"
+              ]
+             }
+            ]
+           },
+           {
+            "span": 2,
+            "groups": [
+             {
+              "title": "Inverter 2 · DC side",
+              "rows": [
+               {
+                "label": "Power",
+                "entities": [
+                 "sensor.sungrow_inverter_2_mppt1_power",
+                 "sensor.sungrow_inverter_2_mppt2_power",
+                 "sensor.sungrow_inverter_2_mppt3_power",
+                 "sensor.sungrow_inverter_2_string_1_power",
+                 "sensor.sungrow_inverter_2_string_2_power",
+                 "sensor.sungrow_inverter_2_string_3_power",
+                 "sensor.sungrow_inverter_2_string_4_power",
+                 "sensor.sungrow_inverter_2_string_5_power"
+                ],
+                "bar": true
+               },
+               {
+                "label": "Voltage",
+                "entities": [
+                 "sensor.sungrow_inverter_2_mppt1_voltage",
+                 "sensor.sungrow_inverter_2_mppt2_voltage",
+                 "sensor.sungrow_inverter_2_mppt3_voltage",
+                 "sensor.sungrow_inverter_2_string_1_voltage",
+                 "sensor.sungrow_inverter_2_string_2_voltage",
+                 "sensor.sungrow_inverter_2_string_3_voltage",
+                 "sensor.sungrow_inverter_2_string_4_voltage",
+                 "sensor.sungrow_inverter_2_string_5_voltage"
+                ]
+               },
+               {
+                "label": "Current",
+                "entities": [
+                 "sensor.sungrow_inverter_2_mppt1_current",
+                 "sensor.sungrow_inverter_2_mppt2_current",
+                 "sensor.sungrow_inverter_2_mppt3_current",
+                 "sensor.sungrow_inverter_2_string_1_current",
+                 "sensor.sungrow_inverter_2_string_2_current",
+                 "sensor.sungrow_inverter_2_string_3_current",
+                 "sensor.sungrow_inverter_2_string_4_current",
+                 "sensor.sungrow_inverter_2_string_5_current"
+                ]
+               }
+              ],
+              "color": "#F2A93B",
+              "dense": true,
+              "split_after": 3,
+              "columns": [
+               "MPPT 1",
+               "MPPT 2",
+               "MPPT 3",
+               "S1",
+               "S2",
+               "S3",
+               "S4",
+               "S5"
+              ]
+             },
+             {
+              "title": "Inverter 2 · AC output",
+              "rows": [
+               {
+                "label": "Power",
+                "entities": [
+                 "sensor.sungrow_inverter_2_phase_a_power",
+                 "sensor.sungrow_inverter_2_phase_b_power",
+                 "sensor.sungrow_inverter_2_phase_c_power"
+                ],
+                "bar": true
+               },
+               {
+                "label": "Voltage",
+                "entities": [
+                 "sensor.sungrow_inverter_2_phase_a_voltage",
+                 "sensor.sungrow_inverter_2_phase_b_voltage",
+                 "sensor.sungrow_inverter_2_phase_c_voltage"
+                ]
+               },
+               {
+                "label": "Current",
+                "entities": [
+                 "sensor.sungrow_inverter_2_phase_a_current",
+                 "sensor.sungrow_inverter_2_phase_b_current",
+                 "sensor.sungrow_inverter_2_phase_c_current"
+                ]
+               }
+              ],
+              "color": "#5B8DEF",
+              "dense": true,
+              "columns": [
+               "A",
+               "B",
+               "C"
+              ]
+             }
+            ]
+           }
+          ],
+          [
+           {
+            "span": 2,
+            "groups": [
+             {
+              "title": "Curtailment · solar and export",
+              "rows": [
+               {
+                "label": "Solar limit",
+                "entities": [
+                 "select.sungrow_inverter_1_pv_power_limitation",
+                 "select.sungrow_inverter_2_pv_power_limitation"
+                ],
+                "tones": {
+                 "Limit PV": "on",
+                 "Allow PV": "off"
+                }
+               },
+               {
+                "label": "Export limit",
+                "entities": [
+                 "select.sungrow_inverter_1_feed_in_limitation",
+                 "select.sungrow_inverter_2_feed_in_limitation"
+                ]
+               },
+               {
+                "label": "Export limit, kW",
+                "entities": [
+                 "number.sungrow_inverter_1_export_power_limit",
+                 "number.sungrow_inverter_2_export_power_limit"
+                ]
+               },
+               {
+                "label": "Export limit, %",
+                "entities": [
+                 "number.sungrow_inverter_1_feed_in_limitation_ratio",
+                 "number.sungrow_inverter_2_feed_in_limitation_ratio"
+                ]
+               },
+               {
+                "label": "Export limit mode",
+                "entities": [
+                 "select.sungrow_inverter_1_export_limit_mode",
+                 "select.sungrow_inverter_2_export_limit_mode"
+                ]
+               }
+              ],
+              "color": "#EF6461",
+              "dense": true,
+              "columns": [
+               "Inverter 1",
+               "Inverter 2"
+              ]
+             }
+            ]
+           },
+           {
+            "span": 2,
+            "groups": [
+             {
+              "title": "Curtailment · inverter output",
+              "rows": [
+               {
+                "label": "Output limit",
+                "entities": [
+                 "select.sungrow_inverter_1_active_power_limitation",
+                 "select.sungrow_inverter_2_active_power_limitation"
+                ]
+               },
+               {
+                "label": "Output limit, %",
+                "entities": [
+                 "number.sungrow_inverter_1_active_power_limit_ratio",
+                 "number.sungrow_inverter_2_active_power_limit_ratio"
+                ]
+               },
+               {
+                "label": "Output limit, kW",
+                "entities": [
+                 "number.sungrow_inverter_1_active_power_limit",
+                 "number.sungrow_inverter_2_active_power_limit"
+                ]
+               },
+               {
+                "label": "Shut down at 0 %",
+                "entities": [
+                 "select.sungrow_inverter_1_shut_down_at_0_power_limit",
+                 "select.sungrow_inverter_2_shut_down_at_0_power_limit"
+                ]
+               }
+              ],
+              "color": "#EF6461",
+              "dense": true,
+              "columns": [
+               "Inverter 1",
+               "Inverter 2"
+              ]
+             }
+            ]
+           }
+          ]
+         ]
+        },
+        {
+         "type": "custom:sungrow-charts",
+         "charts": [
+          {
+           "title": "Inverter power",
+           "color": "#F2A93B",
+           "ranges": [
+            "6h",
+            "24h",
+            "7d"
+           ],
+           "views": [
+            {
+             "name": "Inverter 1",
+             "unit": "kW",
+             "series": [
+              {
+               "entity": "sensor.sungrow_inverter_1_pv_power",
+               "label": "Solar",
+               "color": "#F2A93B",
+               "area": true
+              },
+              {
+               "entity": "sensor.sungrow_inverter_1_active_power",
+               "label": "AC output",
+               "color": "#5B8DEF"
+              },
+              {
+               "entity": "sensor.sungrow_inverter_1_battery_power",
+               "label": "Battery",
+               "color": "#22B5A6"
+              }
+             ],
+             "zero": true
+            },
+            {
+             "name": "Inverter 2",
+             "unit": "kW",
+             "series": [
+              {
+               "entity": "sensor.sungrow_inverter_2_pv_power",
+               "label": "Solar",
+               "color": "#F2A93B",
+               "area": true
+              },
+              {
+               "entity": "sensor.sungrow_inverter_2_active_power",
+               "label": "AC output",
+               "color": "#5B8DEF"
+              },
+              {
+               "entity": "sensor.sungrow_inverter_2_battery_power",
+               "label": "Battery",
+               "color": "#22B5A6"
+              }
+             ],
+             "zero": true
+            }
+           ]
+          },
+          {
+           "title": "MPPTs and strings",
+           "color": "#F2A93B",
+           "ranges": [
+            "24h",
+            "7d"
+           ],
+           "views": [
+            {
+             "name": "MPPTs",
+             "unit": "kW",
+             "series": [
+              {
+               "entity": "sensor.sungrow_inverter_1_mppt1_power",
+               "label": "Inv 1 MPPT 1",
+               "color": "#F2A93B",
+               "dash": false
+              },
+              {
+               "entity": "sensor.sungrow_inverter_1_mppt2_power",
+               "label": "Inv 1 MPPT 2",
+               "color": "#EF6461",
+               "dash": false
+              },
+              {
+               "entity": "sensor.sungrow_inverter_1_mppt3_power",
+               "label": "Inv 1 MPPT 3",
+               "color": "#9B87F5",
+               "dash": false
+              },
+              {
+               "entity": "sensor.sungrow_inverter_2_mppt1_power",
+               "label": "Inv 2 MPPT 1",
+               "color": "#F2A93B",
+               "dash": true
+              },
+              {
+               "entity": "sensor.sungrow_inverter_2_mppt2_power",
+               "label": "Inv 2 MPPT 2",
+               "color": "#EF6461",
+               "dash": true
+              },
+              {
+               "entity": "sensor.sungrow_inverter_2_mppt3_power",
+               "label": "Inv 2 MPPT 3",
+               "color": "#9B87F5",
+               "dash": true
+              }
+             ],
+             "min": 0
+            },
+            {
+             "name": "Inverter 1 strings",
+             "unit": "kW",
+             "series": [
+              {
+               "entity": "sensor.sungrow_inverter_1_string_1_power",
+               "label": "String 1",
+               "color": "#F2A93B"
+              },
+              {
+               "entity": "sensor.sungrow_inverter_1_string_2_power",
+               "label": "String 2",
+               "color": "#EF6461"
+              },
+              {
+               "entity": "sensor.sungrow_inverter_1_string_3_power",
+               "label": "String 3",
+               "color": "#9B87F5"
+              },
+              {
+               "entity": "sensor.sungrow_inverter_1_string_4_power",
+               "label": "String 4",
+               "color": "#5B8DEF"
+              },
+              {
+               "entity": "sensor.sungrow_inverter_1_string_5_power",
+               "label": "String 5",
+               "color": "#22B5A6"
+              }
+             ],
+             "min": 0
+            },
+            {
+             "name": "Inverter 2 strings",
+             "unit": "kW",
+             "series": [
+              {
+               "entity": "sensor.sungrow_inverter_2_string_1_power",
+               "label": "String 1",
+               "color": "#F2A93B"
+              },
+              {
+               "entity": "sensor.sungrow_inverter_2_string_2_power",
+               "label": "String 2",
+               "color": "#EF6461"
+              },
+              {
+               "entity": "sensor.sungrow_inverter_2_string_3_power",
+               "label": "String 3",
+               "color": "#9B87F5"
+              },
+              {
+               "entity": "sensor.sungrow_inverter_2_string_4_power",
+               "label": "String 4",
+               "color": "#5B8DEF"
+              },
+              {
+               "entity": "sensor.sungrow_inverter_2_string_5_power",
+               "label": "String 5",
+               "color": "#22B5A6"
+              }
+             ],
+             "min": 0
+            }
+           ]
+          },
+          {
+           "title": "Limits against what happened",
+           "color": "#EF6461",
+           "ranges": [
+            "24h",
+            "7d"
+           ],
+           "views": [
+            {
+             "name": "Inverter 1",
+             "unit": "kW",
+             "series": [
+              {
+               "entity": "sensor.sungrow_inverter_1_active_power",
+               "label": "AC output",
+               "color": "#5B8DEF",
+               "area": true
+              },
+              {
+               "entity": "number.sungrow_inverter_1_active_power_limit",
+               "label": "Output limit",
+               "color": "#EF6461",
+               "step": true,
+               "dash": true
+              },
+              {
+               "entity": "number.sungrow_inverter_1_export_power_limit",
+               "label": "Export limit",
+               "color": "#E8C547",
+               "step": true,
+               "dash": true
+              }
+             ],
+             "min": 0
+            },
+            {
+             "name": "Inverter 2",
+             "unit": "kW",
+             "series": [
+              {
+               "entity": "sensor.sungrow_inverter_2_active_power",
+               "label": "AC output",
+               "color": "#5B8DEF",
+               "area": true
+              },
+              {
+               "entity": "number.sungrow_inverter_2_active_power_limit",
+               "label": "Output limit",
+               "color": "#EF6461",
+               "step": true,
+               "dash": true
+              },
+              {
+               "entity": "number.sungrow_inverter_2_export_power_limit",
+               "label": "Export limit",
+               "color": "#E8C547",
+               "step": true,
+               "dash": true
+              }
+             ],
+             "min": 0
+            },
+            {
+             "name": "Site",
+             "unit": "kW",
+             "series": [
+              {
+               "entity": "sensor.sungrow_logger_grid_power",
+               "label": "Export",
+               "color": "#3FB37F",
+               "area": true,
+               "scale": -1
+              },
+              {
+               "entity": "number.sungrow_logger_feed_in_limit",
+               "label": "Feed-in limit",
+               "color": "#EF6461",
+               "step": true,
+               "dash": true
+              }
+             ],
+             "zero": true
+            }
+           ],
+           "span": 4
+          }
+         ]
+        }
+       ]
+      },
+      {
+       "id": "battery",
+       "title": "Battery",
+       "subtitle": "The whole battery, each inverter and each tower",
+       "cards": [
+        {
+         "type": "custom:sungrow-battery-card",
+         "towers": [
+          1,
+          2,
+          3,
+          4
+         ],
+         "needs": "sensor.sungrow_logger_battery_level"
+        },
+        {
+         "type": "custom:sungrow-matrix-card",
+         "layout": [
+          [
+           {
+            "span": 4,
+            "groups": [
+             {
+              "title": "Towers",
+              "rows": [
+               {
+                "label": "Status",
+                "entities": [
+                 "sensor.sungrow_battery_tower_1_status",
+                 "sensor.sungrow_battery_tower_2_status",
+                 "sensor.sungrow_battery_tower_3_status",
+                 "sensor.sungrow_battery_tower_4_status"
+                ]
+               },
+               {
+                "label": "Level",
+                "entities": [
+                 "sensor.sungrow_battery_tower_1_battery_level",
+                 "sensor.sungrow_battery_tower_2_battery_level",
+                 "sensor.sungrow_battery_tower_3_battery_level",
+                 "sensor.sungrow_battery_tower_4_battery_level"
+                ],
+                "bar": true
+               },
+               {
+                "label": "Voltage",
+                "entities": [
+                 "sensor.sungrow_battery_tower_1_voltage",
+                 "sensor.sungrow_battery_tower_2_voltage",
+                 "sensor.sungrow_battery_tower_3_voltage",
+                 "sensor.sungrow_battery_tower_4_voltage"
+                ]
+               },
+               {
+                "label": "Current",
+                "entities": [
+                 "sensor.sungrow_battery_tower_1_current",
+                 "sensor.sungrow_battery_tower_2_current",
+                 "sensor.sungrow_battery_tower_3_current",
+                 "sensor.sungrow_battery_tower_4_current"
+                ]
+               },
+               {
+                "label": "Health",
+                "entities": [
+                 "sensor.sungrow_battery_tower_1_state_of_health",
+                 "sensor.sungrow_battery_tower_2_state_of_health",
+                 "sensor.sungrow_battery_tower_3_state_of_health",
+                 "sensor.sungrow_battery_tower_4_state_of_health"
+                ]
+               },
+               {
+                "label": "Charged, lifetime",
+                "entities": [
+                 "sensor.sungrow_battery_tower_1_total_charge",
+                 "sensor.sungrow_battery_tower_2_total_charge",
+                 "sensor.sungrow_battery_tower_3_total_charge",
+                 "sensor.sungrow_battery_tower_4_total_charge"
+                ]
+               },
+               {
+                "label": "Discharged, lifetime",
+                "entities": [
+                 "sensor.sungrow_battery_tower_1_total_discharge",
+                 "sensor.sungrow_battery_tower_2_total_discharge",
+                 "sensor.sungrow_battery_tower_3_total_discharge",
+                 "sensor.sungrow_battery_tower_4_total_discharge"
+                ]
+               }
+              ],
+              "color": "#22B5A6",
+              "dense": true,
+              "note": "Cell and module voltages are not available over Modbus: the Logger refuses those registers. A tower’s own temperature register reads a fixed 14 °C through a Logger1000, so each tower shows its battery stack’s temperature, as its inverter measures it.",
+              "columns": [
+               "Tower 1",
+               "Tower 2",
+               "Tower 3",
+               "Tower 4"
+              ]
+             }
+            ]
+           }
+          ],
+          [
+           {
+            "span": 2,
+            "groups": [
+             {
+              "title": "Each inverter's battery",
+              "rows": [
+               {
+                "label": "Level",
+                "entities": [
+                 "sensor.sungrow_inverter_1_battery_level",
+                 "sensor.sungrow_inverter_2_battery_level"
+                ],
+                "bar": true
+               },
+               {
+                "label": "Level, nominal",
+                "entities": [
+                 "sensor.sungrow_inverter_1_battery_level_nominal",
+                 "sensor.sungrow_inverter_2_battery_level_nominal"
+                ]
+               },
+               {
+                "label": "Power",
+                "entities": [
+                 "sensor.sungrow_inverter_1_battery_power",
+                 "sensor.sungrow_inverter_2_battery_power"
+                ]
+               },
+               {
+                "label": "Charging",
+                "entities": [
+                 "sensor.sungrow_inverter_1_battery_charging_power",
+                 "sensor.sungrow_inverter_2_battery_charging_power"
+                ]
+               },
+               {
+                "label": "Discharging",
+                "entities": [
+                 "sensor.sungrow_inverter_1_battery_discharging_power",
+                 "sensor.sungrow_inverter_2_battery_discharging_power"
+                ]
+               },
+               {
+                "label": "Voltage",
+                "entities": [
+                 "sensor.sungrow_inverter_1_battery_voltage",
+                 "sensor.sungrow_inverter_2_battery_voltage"
+                ]
+               },
+               {
+                "label": "Current",
+                "entities": [
+                 "sensor.sungrow_inverter_1_battery_current",
+                 "sensor.sungrow_inverter_2_battery_current"
+                ]
+               },
+               {
+                "label": "Temperature",
+                "entities": [
+                 "sensor.sungrow_inverter_1_battery_temperature",
+                 "sensor.sungrow_inverter_2_battery_temperature"
+                ]
+               },
+               {
+                "label": "Health",
+                "entities": [
+                 "sensor.sungrow_inverter_1_battery_state_of_health",
+                 "sensor.sungrow_inverter_2_battery_state_of_health"
+                ]
+               },
+               {
+                "label": "Capacity",
+                "entities": [
+                 "sensor.sungrow_inverter_1_battery_capacity",
+                 "sensor.sungrow_inverter_2_battery_capacity"
+                ]
+               },
+               {
+                "label": "Stored",
+                "entities": [
+                 "sensor.sungrow_inverter_1_battery_charge",
+                 "sensor.sungrow_inverter_2_battery_charge"
+                ]
+               },
+               {
+                "label": "Stored, nominal",
+                "entities": [
+                 "sensor.sungrow_inverter_1_battery_charge_nominal",
+                 "sensor.sungrow_inverter_2_battery_charge_nominal"
+                ]
+               },
+               {
+                "label": "Stored, health-rated",
+                "entities": [
+                 "sensor.sungrow_inverter_1_battery_charge_health_rated",
+                 "sensor.sungrow_inverter_2_battery_charge_health_rated"
+                ]
+               },
+               {
+                "label": "BMS max charge current",
+                "entities": [
+                 "sensor.sungrow_inverter_1_bms_max_charge_current",
+                 "sensor.sungrow_inverter_2_bms_max_charge_current"
+                ]
+               },
+               {
+                "label": "BMS max discharge current",
+                "entities": [
+                 "sensor.sungrow_inverter_1_bms_max_discharge_current",
+                 "sensor.sungrow_inverter_2_bms_max_discharge_current"
+                ]
+               }
+              ],
+              "color": "#22B5A6",
+              "dense": true,
+              "columns": [
+               "Inverter 1",
+               "Inverter 2"
+              ]
+             }
+            ]
+           },
+           {
+            "span": 2,
+            "groups": [
+             {
+              "title": "Limits",
+              "rows": [
+               {
+                "label": "Min SoC",
+                "entities": [
+                 "number.sungrow_inverter_1_min_soc",
+                 "number.sungrow_inverter_2_min_soc"
+                ]
+               },
+               {
+                "label": "Max SoC",
+                "entities": [
+                 "number.sungrow_inverter_1_max_soc",
+                 "number.sungrow_inverter_2_max_soc"
+                ]
+               },
+               {
+                "label": "Max charge power",
+                "entities": [
+                 "number.sungrow_inverter_1_max_battery_charge_power",
+                 "number.sungrow_inverter_2_max_battery_charge_power"
+                ]
+               },
+               {
+                "label": "Max discharge power",
+                "entities": [
+                 "number.sungrow_inverter_1_max_battery_discharge_power",
+                 "number.sungrow_inverter_2_max_battery_discharge_power"
+                ]
+               }
+              ],
+              "color": "#EF6461",
+              "columns": [
+               "Inverter 1",
+               "Inverter 2"
+              ]
+             },
+             {
+              "title": "Whole battery (Logger)",
+              "rows": [
+               {
+                "label": "Rated capacity",
+                "entities": [
+                 "sensor.sungrow_logger_total_battery_rated_capacity"
+                ]
+               },
+               {
+                "label": "Can charge at",
+                "entities": [
+                 "sensor.sungrow_logger_battery_max_allowable_charge_power"
+                ]
+               },
+               {
+                "label": "Can discharge at",
+                "entities": [
+                 "sensor.sungrow_logger_battery_max_allowable_discharge_power"
+                ]
+               },
+               {
+                "label": "Min charge power",
+                "entities": [
+                 "sensor.sungrow_logger_battery_min_allowable_charge_power"
+                ]
+               },
+               {
+                "label": "Min discharge power",
+                "entities": [
+                 "sensor.sungrow_logger_battery_min_allowable_discharge_power"
+                ]
+               }
+              ],
+              "color": "#22B5A6"
+             }
+            ]
+           }
+          ],
+          [
+           {
+            "span": 4,
+            "groups": [
+             {
+              "title": "Battery energy",
+              "rows": [
+               {
+                "label": "Charged today",
+                "entities": [
+                 "sensor.sungrow_inverter_1_daily_battery_charge",
+                 "sensor.sungrow_inverter_2_daily_battery_charge",
+                 "sensor.sungrow_logger_daily_battery_charge"
+                ]
+               },
+               {
+                "label": "Discharged today",
+                "entities": [
+                 "sensor.sungrow_inverter_1_daily_battery_discharge",
+                 "sensor.sungrow_inverter_2_daily_battery_discharge",
+                 "sensor.sungrow_logger_daily_battery_discharge"
+                ]
+               },
+               {
+                "label": "Charged, lifetime",
+                "entities": [
+                 "sensor.sungrow_inverter_1_total_battery_charge",
+                 "sensor.sungrow_inverter_2_total_battery_charge",
+                 "sensor.sungrow_logger_total_battery_charge"
+                ]
+               },
+               {
+                "label": "Discharged, lifetime",
+                "entities": [
+                 "sensor.sungrow_inverter_1_total_battery_discharge",
+                 "sensor.sungrow_inverter_2_total_battery_discharge",
+                 "sensor.sungrow_logger_total_battery_discharge"
+                ]
+               }
+              ],
+              "color": "#22B5A6",
+              "columns": [
+               "Inverter 1",
+               "Inverter 2",
+               "Site"
+              ]
+             }
+            ]
+           }
+          ]
+         ]
+        },
+        {
+         "type": "custom:sungrow-charts",
+         "charts": [
+          {
+           "title": "State of charge",
+           "color": "#22B5A6",
+           "ranges": [
+            "24h",
+            "7d",
+            "60d",
+            "360d"
+           ],
+           "views": [
+            {
+             "name": "",
+             "unit": "%",
+             "series": [
+              {
+               "entity": "sensor.sungrow_logger_battery_level",
+               "label": "Site",
+               "color": "#8a93a3",
+               "area": true
+              },
+              {
+               "entity": "sensor.sungrow_inverter_1_battery_level",
+               "label": "Inverter 1",
+               "color": "#F2A93B"
+              },
+              {
+               "entity": "sensor.sungrow_inverter_2_battery_level",
+               "label": "Inverter 2",
+               "color": "#22B5A6"
+              }
+             ],
+             "min": 0,
+             "max": 100
+            }
+           ]
+          },
+          {
+           "title": "Battery towers",
+           "color": "#22B5A6",
+           "ranges": [
+            "24h",
+            "7d",
+            "60d"
+           ],
+           "views": [
+            {
+             "name": "Charge",
+             "unit": "%",
+             "series": [
+              {
+               "entity": "sensor.sungrow_battery_tower_1_battery_level",
+               "label": "Tower 1",
+               "color": "#22B5A6"
+              },
+              {
+               "entity": "sensor.sungrow_battery_tower_2_battery_level",
+               "label": "Tower 2",
+               "color": "#5B8DEF"
+              },
+              {
+               "entity": "sensor.sungrow_battery_tower_3_battery_level",
+               "label": "Tower 3",
+               "color": "#F2A93B"
+              },
+              {
+               "entity": "sensor.sungrow_battery_tower_4_battery_level",
+               "label": "Tower 4",
+               "color": "#9B87F5"
+              }
+             ],
+             "bands": [
+              {
+               "entity": "binary_sensor.sungrow_inverter_1_battery_charging_60_s",
+               "label": "Charging",
+               "color": "#3FB37F"
+              },
+              {
+               "entity": "binary_sensor.sungrow_inverter_1_battery_discharging_60_s",
+               "label": "Discharging",
+               "color": "#EF6461"
+              }
+             ],
+             "min": 0,
+             "max": 100
+            },
+            {
+             "name": "Current",
+             "unit": "A",
+             "series": [
+              {
+               "entity": "sensor.sungrow_battery_tower_1_current",
+               "label": "Tower 1",
+               "color": "#22B5A6"
+              },
+              {
+               "entity": "sensor.sungrow_battery_tower_2_current",
+               "label": "Tower 2",
+               "color": "#5B8DEF"
+              },
+              {
+               "entity": "sensor.sungrow_battery_tower_3_current",
+               "label": "Tower 3",
+               "color": "#F2A93B"
+              },
+              {
+               "entity": "sensor.sungrow_battery_tower_4_current",
+               "label": "Tower 4",
+               "color": "#9B87F5"
+              }
+             ],
+             "bands": [
+              {
+               "entity": "binary_sensor.sungrow_inverter_1_battery_charging_60_s",
+               "label": "Charging",
+               "color": "#3FB37F"
+              },
+              {
+               "entity": "binary_sensor.sungrow_inverter_1_battery_discharging_60_s",
+               "label": "Discharging",
+               "color": "#EF6461"
+              }
+             ],
+             "zero": true
+            },
+            {
+             "name": "Voltage",
+             "unit": "V",
+             "series": [
+              {
+               "entity": "sensor.sungrow_battery_tower_1_voltage",
+               "label": "Tower 1",
+               "color": "#22B5A6"
+              },
+              {
+               "entity": "sensor.sungrow_battery_tower_2_voltage",
+               "label": "Tower 2",
+               "color": "#5B8DEF"
+              },
+              {
+               "entity": "sensor.sungrow_battery_tower_3_voltage",
+               "label": "Tower 3",
+               "color": "#F2A93B"
+              },
+              {
+               "entity": "sensor.sungrow_battery_tower_4_voltage",
+               "label": "Tower 4",
+               "color": "#9B87F5"
+              }
+             ]
+            },
+            {
+             "name": "Health",
+             "unit": "%",
+             "series": [
+              {
+               "entity": "sensor.sungrow_battery_tower_1_state_of_health",
+               "label": "Tower 1",
+               "color": "#22B5A6"
+              },
+              {
+               "entity": "sensor.sungrow_battery_tower_2_state_of_health",
+               "label": "Tower 2",
+               "color": "#5B8DEF"
+              },
+              {
+               "entity": "sensor.sungrow_battery_tower_3_state_of_health",
+               "label": "Tower 3",
+               "color": "#F2A93B"
+              },
+              {
+               "entity": "sensor.sungrow_battery_tower_4_state_of_health",
+               "label": "Tower 4",
+               "color": "#9B87F5"
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      },
+      {
+       "id": "grid",
+       "title": "Grid",
+       "subtitle": "The grid meter, phase by phase",
+       "cards": [
+        {
+         "type": "custom:sungrow-grid-card",
+         "needs": "sensor.sungrow_grid_meter_grid_power"
+        },
+        {
+         "type": "custom:sungrow-matrix-card",
+         "layout": [
+          [
+           {
+            "span": 2,
+            "groups": [
+             {
+              "title": "Per phase",
+              "rows": [
+               {
+                "label": "Power",
+                "entities": [
+                 "sensor.sungrow_grid_meter_phase_a_power",
+                 "sensor.sungrow_grid_meter_phase_b_power",
+                 "sensor.sungrow_grid_meter_phase_c_power"
+                ],
+                "bar": true
+               },
+               {
+                "label": "Voltage",
+                "entities": [
+                 "sensor.sungrow_grid_meter_phase_a_voltage",
+                 "sensor.sungrow_grid_meter_phase_b_voltage",
+                 "sensor.sungrow_grid_meter_phase_c_voltage"
+                ]
+               },
+               {
+                "label": "Current",
+                "entities": [
+                 "sensor.sungrow_grid_meter_phase_a_current",
+                 "sensor.sungrow_grid_meter_phase_b_current",
+                 "sensor.sungrow_grid_meter_phase_c_current"
+                ]
+               },
+               {
+                "label": "Power factor",
+                "entities": [
+                 "sensor.sungrow_grid_meter_phase_a_power_factor",
+                 "sensor.sungrow_grid_meter_phase_b_power_factor",
+                 "sensor.sungrow_grid_meter_phase_c_power_factor"
+                ]
+               },
+               {
+                "label": "Reactive power",
+                "entities": [
+                 "sensor.sungrow_grid_meter_phase_a_reactive_power",
+                 "sensor.sungrow_grid_meter_phase_b_reactive_power",
+                 "sensor.sungrow_grid_meter_phase_c_reactive_power"
+                ]
+               },
+               {
+                "label": "Apparent power",
+                "entities": [
+                 "sensor.sungrow_grid_meter_phase_a_apparent_power",
+                 "sensor.sungrow_grid_meter_phase_b_apparent_power",
+                 "sensor.sungrow_grid_meter_phase_c_apparent_power"
+                ]
+               },
+               {
+                "label": "Line voltage",
+                "entities": [
+                 "sensor.sungrow_grid_meter_line_voltage_a_b",
+                 "sensor.sungrow_grid_meter_line_voltage_b_c",
+                 "sensor.sungrow_grid_meter_line_voltage_c_a"
+                ]
+               }
+              ],
+              "color": "#5B8DEF",
+              "corner": "",
+              "note": "Line voltages: A–B, B–C, C–A.",
+              "columns": [
+               "Phase A",
+               "Phase B",
+               "Phase C"
+              ]
+             }
+            ]
+           },
+           {
+            "span": 1,
+            "groups": [
+             {
+              "title": "Meter",
+              "rows": [
+               {
+                "label": "Grid power",
+                "entities": [
+                 "sensor.sungrow_grid_meter_grid_power"
+                ]
+               },
+               {
+                "label": "Frequency",
+                "entities": [
+                 "sensor.sungrow_grid_meter_frequency"
+                ]
+               },
+               {
+                "label": "Power factor",
+                "entities": [
+                 "sensor.sungrow_grid_meter_power_factor"
+                ]
+               },
+               {
+                "label": "Reactive power",
+                "entities": [
+                 "sensor.sungrow_grid_meter_reactive_power"
+                ]
+               },
+               {
+                "label": "Apparent power",
+                "entities": [
+                 "sensor.sungrow_grid_meter_apparent_power"
+                ]
+               },
+               {
+                "label": "Meter total",
+                "entities": [
+                 "sensor.sungrow_grid_meter_total_energy"
+                ]
+               },
+               {
+                "label": "Site AC power (Logger)",
+                "entities": [
+                 "sensor.sungrow_logger_total_active_power"
+                ]
+               }
+              ],
+              "color": "#5B8DEF"
+             }
+            ]
+           },
+           {
+            "span": 1,
+            "groups": [
+             {
+              "title": "Grid limits",
+              "rows": [
+               {
+                "label": "Export",
+                "entities": [
+                 "number.sungrow_inverter_1_export_power_limit",
+                 "number.sungrow_inverter_2_export_power_limit"
+                ]
+               },
+               {
+                "label": "Fallback",
+                "entities": [
+                 "number.sungrow_inverter_1_export_limit_fallback",
+                 "number.sungrow_inverter_2_export_limit_fallback"
+                ]
+               },
+               {
+                "label": "Import",
+                "entities": [
+                 "number.sungrow_inverter_1_site_import_limit",
+                 "number.sungrow_inverter_2_site_import_limit"
+                ]
+               }
+              ],
+              "color": "#EF6461",
+              "dense": true,
+              "columns": [
+               "Inv 1",
+               "Inv 2"
+              ]
+             },
+             {
+              "title": "Site feed-in limit (Logger)",
+              "rows": [
+               {
+                "label": "Export",
+                "entities": [
+                 "number.sungrow_logger_feed_in_limit"
+                ]
+               }
+              ],
+              "color": "#EF6461",
+              "dense": true
+             }
+            ]
+           }
+          ],
+          [
+           {
+            "span": 4,
+            "groups": [
+             {
+              "title": "Grid energy",
+              "rows": [
+               {
+                "label": "Imported today",
+                "entities": [
+                 "sensor.sungrow_inverter_1_daily_import_energy",
+                 "sensor.sungrow_inverter_2_daily_import_energy",
+                 null
+                ]
+               },
+               {
+                "label": "Exported today",
+                "entities": [
+                 "sensor.sungrow_inverter_1_daily_export_energy",
+                 "sensor.sungrow_inverter_2_daily_export_energy",
+                 null
+                ]
+               },
+               {
+                "label": "Imported, lifetime",
+                "entities": [
+                 "sensor.sungrow_inverter_1_total_import_energy",
+                 "sensor.sungrow_inverter_2_total_import_energy",
+                 "sensor.sungrow_logger_grid_import_energy"
+                ]
+               },
+               {
+                "label": "Exported, lifetime",
+                "entities": [
+                 "sensor.sungrow_inverter_1_total_export_energy",
+                 "sensor.sungrow_inverter_2_total_export_energy",
+                 "sensor.sungrow_logger_grid_export_energy"
+                ]
+               },
+               {
+                "label": "House used, lifetime",
+                "entities": [
+                 "sensor.sungrow_inverter_1_total_consumed_energy",
+                 "sensor.sungrow_inverter_2_total_consumed_energy",
+                 null
+                ]
+               }
+              ],
+              "color": "#5B8DEF",
+              "columns": [
+               "Inverter 1",
+               "Inverter 2",
+               "Site"
+              ]
+             }
+            ]
+           }
+          ]
+         ]
+        },
+        {
+         "type": "custom:sungrow-charts",
+         "charts": [
+          {
+           "title": "Grid power: Logger and meter",
+           "color": "#5B8DEF",
+           "ranges": [
+            "6h",
+            "24h",
+            "7d"
+           ],
+           "views": [
+            {
+             "name": "",
+             "unit": "kW",
+             "series": [
+              {
+               "entity": "sensor.sungrow_grid_meter_grid_power",
+               "label": "Grid meter",
+               "color": "#5B8DEF"
+              },
+              {
+               "entity": "sensor.sungrow_logger_grid_power",
+               "label": "Logger",
+               "color": "#E8C547",
+               "dash": true
+              }
+             ],
+             "zero": true
+            }
+           ],
+           "note": "Positive: importing. Negative: exporting."
+          },
+          {
+           "title": "Grid voltage and frequency",
+           "color": "#5B8DEF",
+           "ranges": [
+            "6h",
+            "24h",
+            "7d",
+            "60d"
+           ],
+           "views": [
+            {
+             "name": "Voltage",
+             "unit": "V",
+             "series": [
+              {
+               "entity": "sensor.sungrow_grid_meter_phase_a_voltage",
+               "label": "Phase A",
+               "color": "#EF6461"
+              },
+              {
+               "entity": "sensor.sungrow_grid_meter_phase_b_voltage",
+               "label": "Phase B",
+               "color": "#E8C547"
+              },
+              {
+               "entity": "sensor.sungrow_grid_meter_phase_c_voltage",
+               "label": "Phase C",
+               "color": "#5B8DEF"
+              }
+             ],
+             "refs": [
+              {
+               "value": 253,
+               "label": "253 V upper",
+               "color": "#EF6461"
+              },
+              {
+               "value": 230,
+               "label": "230 V nominal",
+               "color": "#8a93a3"
+              },
+              {
+               "value": 216,
+               "label": "216 V lower",
+               "color": "#EF6461"
+              }
+             ]
+            },
+            {
+             "name": "Frequency",
+             "unit": "Hz",
+             "series": [
+              {
+               "entity": "sensor.sungrow_grid_meter_frequency",
+               "label": "Grid",
+               "color": "#5B8DEF"
+              }
+             ],
+             "refs": [
+              {
+               "value": 50.15,
+               "label": "50.15 Hz",
+               "color": "#EF6461"
+              },
+              {
+               "value": 50,
+               "label": "50 Hz",
+               "color": "#8a93a3"
+              },
+              {
+               "value": 49.85,
+               "label": "49.85 Hz",
+               "color": "#EF6461"
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      },
+      {
+       "id": "backup",
+       "title": "Backup",
+       "subtitle": "Whole-home backup output",
+       "cards": [
+        {
+         "type": "custom:sungrow-matrix-card",
+         "groups": [
+          {
+           "title": "Whole-home backup",
+           "rows": [
+            {
+             "label": "Backup",
+             "entities": [
+              "select.sungrow_inverter_1_backup_off_grid_option",
+              "select.sungrow_inverter_2_backup_off_grid_option"
+             ]
+            },
+            {
+             "label": "Reserve",
+             "entities": [
+              "number.sungrow_inverter_1_reserved_soc_for_backup",
+              "number.sungrow_inverter_2_reserved_soc_for_backup"
+             ]
+            },
+            {
+             "label": "Backup power",
+             "entities": [
+              "sensor.sungrow_inverter_1_backup_power",
+              "sensor.sungrow_inverter_2_backup_power"
+             ],
+             "bar": true
+            },
+            {
+             "label": "Frequency",
+             "entities": [
+              "sensor.sungrow_inverter_1_backup_frequency",
+              "sensor.sungrow_inverter_2_backup_frequency"
+             ]
+            },
+            {
+             "label": "Backup, both inverters",
+             "sum": [
+              "sensor.sungrow_inverter_1_backup_power",
+              "sensor.sungrow_inverter_2_backup_power"
+             ]
+            },
+            {
+             "label": "House, whole (Logger)",
+             "sum": [
+              "sensor.sungrow_logger_load_power"
+             ]
+            }
+           ],
+           "color": "#22B5A6",
+           "wide": true,
+           "note": "Backup carries only the circuits wired to the backup ports; the rest of the house is supplied directly.",
+           "columns": [
+            "Inverter 1",
+            "Inverter 2"
+           ]
+          },
+          {
+           "title": "Inverter 1 · backup output",
+           "rows": [
+            {
+             "label": "Power",
+             "entities": [
+              "sensor.sungrow_inverter_1_backup_phase_a_power",
+              "sensor.sungrow_inverter_1_backup_phase_b_power",
+              "sensor.sungrow_inverter_1_backup_phase_c_power"
+             ],
+             "bar": true
+            },
+            {
+             "label": "Voltage",
+             "entities": [
+              "sensor.sungrow_inverter_1_backup_phase_a_voltage",
+              "sensor.sungrow_inverter_1_backup_phase_b_voltage",
+              "sensor.sungrow_inverter_1_backup_phase_c_voltage"
+             ]
+            },
+            {
+             "label": "Current",
+             "entities": [
+              "sensor.sungrow_inverter_1_backup_phase_a_current",
+              "sensor.sungrow_inverter_1_backup_phase_b_current",
+              "sensor.sungrow_inverter_1_backup_phase_c_current"
+             ]
+            }
+           ],
+           "color": "#22B5A6",
+           "columns": [
+            "A",
+            "B",
+            "C"
+           ]
+          },
+          {
+           "title": "Inverter 2 · backup output",
+           "rows": [
+            {
+             "label": "Power",
+             "entities": [
+              "sensor.sungrow_inverter_2_backup_phase_a_power",
+              "sensor.sungrow_inverter_2_backup_phase_b_power",
+              "sensor.sungrow_inverter_2_backup_phase_c_power"
+             ],
+             "bar": true
+            },
+            {
+             "label": "Voltage",
+             "entities": [
+              "sensor.sungrow_inverter_2_backup_phase_a_voltage",
+              "sensor.sungrow_inverter_2_backup_phase_b_voltage",
+              "sensor.sungrow_inverter_2_backup_phase_c_voltage"
+             ]
+            },
+            {
+             "label": "Current",
+             "entities": [
+              "sensor.sungrow_inverter_2_backup_phase_a_current",
+              "sensor.sungrow_inverter_2_backup_phase_b_current",
+              "sensor.sungrow_inverter_2_backup_phase_c_current"
+             ]
+            }
+           ],
+           "color": "#22B5A6",
+           "columns": [
+            "A",
+            "B",
+            "C"
+           ]
+          }
+         ]
+        },
+        {
+         "type": "custom:sungrow-charts",
+         "charts": [
+          {
+           "title": "Backup output",
+           "color": "#22B5A6",
+           "ranges": [
+            "24h",
+            "7d"
+           ],
+           "views": [
+            {
+             "name": "Inverter 1 power",
+             "unit": "kW",
+             "series": [
+              {
+               "entity": "sensor.sungrow_inverter_1_backup_phase_a_power",
+               "label": "Phase A",
+               "color": "#EF6461",
+               "area": true
+              },
+              {
+               "entity": "sensor.sungrow_inverter_1_backup_phase_b_power",
+               "label": "Phase B",
+               "color": "#E8C547",
+               "area": true
+              },
+              {
+               "entity": "sensor.sungrow_inverter_1_backup_phase_c_power",
+               "label": "Phase C",
+               "color": "#5B8DEF",
+               "area": true
+              }
+             ],
+             "min": 0
+            },
+            {
+             "name": "Inverter 2 power",
+             "unit": "kW",
+             "series": [
+              {
+               "entity": "sensor.sungrow_inverter_2_backup_phase_a_power",
+               "label": "Phase A",
+               "color": "#EF6461",
+               "area": true
+              },
+              {
+               "entity": "sensor.sungrow_inverter_2_backup_phase_b_power",
+               "label": "Phase B",
+               "color": "#E8C547",
+               "area": true
+              },
+              {
+               "entity": "sensor.sungrow_inverter_2_backup_phase_c_power",
+               "label": "Phase C",
+               "color": "#5B8DEF",
+               "area": true
+              }
+             ],
+             "min": 0
+            },
+            {
+             "name": "Inverter 1 voltage",
+             "unit": "V",
+             "series": [
+              {
+               "entity": "sensor.sungrow_inverter_1_backup_phase_a_voltage",
+               "label": "Phase A",
+               "color": "#EF6461"
+              },
+              {
+               "entity": "sensor.sungrow_inverter_1_backup_phase_b_voltage",
+               "label": "Phase B",
+               "color": "#E8C547"
+              },
+              {
+               "entity": "sensor.sungrow_inverter_1_backup_phase_c_voltage",
+               "label": "Phase C",
+               "color": "#5B8DEF"
+              }
+             ]
+            },
+            {
+             "name": "Inverter 2 voltage",
+             "unit": "V",
+             "series": [
+              {
+               "entity": "sensor.sungrow_inverter_2_backup_phase_a_voltage",
+               "label": "Phase A",
+               "color": "#EF6461"
+              },
+              {
+               "entity": "sensor.sungrow_inverter_2_backup_phase_b_voltage",
+               "label": "Phase B",
+               "color": "#E8C547"
+              },
+              {
+               "entity": "sensor.sungrow_inverter_2_backup_phase_c_voltage",
+               "label": "Phase C",
+               "color": "#5B8DEF"
+              }
+             ]
+            }
+           ],
+           "span": 4
+          }
+         ]
+        }
+       ]
+      },
+      {
+       "id": "controls",
+       "title": "Controls",
+       "subtitle": "Every setting, written and read back · green on, red off",
+       "cards": [
+        {
+         "type": "custom:sungrow-matrix-card",
+         "layout": [
+          [
+           {
+            "span": 1,
+            "groups": [
+             {
+              "title": "Site (Logger)",
+              "rows": [
+               {
+                "label": "EMS mode",
+                "entities": [
+                 "select.sungrow_logger_ems_mode"
+                ]
+               },
+               {
+                "label": "Charge / discharge",
+                "entities": [
+                 "select.sungrow_logger_charge_discharge_command"
+                ],
+                "tones": {
+                 "Stop": "off",
+                 "Forced charge": "on",
+                 "Forced discharge": "on",
+                 "Charge": "on",
+                 "Discharge": "on"
+                }
+               },
+               {
+                "label": "Charge / discharge power",
+                "entities": [
+                 "number.sungrow_logger_charge_discharge_power"
+                ]
+               },
+               {
+                "label": "Feed-in limit",
+                "entities": [
+                 "number.sungrow_logger_feed_in_limit"
+                ]
+               }
+              ],
+              "color": "#5B8DEF",
+              "dense": true
+             },
+             {
+              "title": "Inverter trims: ramp rates and fallbacks",
+              "rows": [
+               {
+                "label": "Power rising gradient",
+                "entities": [
+                 "number.sungrow_inverter_1_power_rising_gradient",
+                 "number.sungrow_inverter_2_power_rising_gradient"
+                ]
+               },
+               {
+                "label": "Power decline gradient",
+                "entities": [
+                 "number.sungrow_inverter_1_power_decline_gradient",
+                 "number.sungrow_inverter_2_power_decline_gradient"
+                ]
+               },
+               {
+                "label": "Rising, fallback",
+                "entities": [
+                 "number.sungrow_inverter_1_power_rising_gradient_fallback",
+                 "number.sungrow_inverter_2_power_rising_gradient_fallback"
+                ]
+               },
+               {
+                "label": "Decline, fallback",
+                "entities": [
+                 "number.sungrow_inverter_1_power_decline_gradient_fallback",
+                 "number.sungrow_inverter_2_power_decline_gradient_fallback"
+                ]
+               },
+               {
+                "label": "Export, fallback",
+                "entities": [
+                 "number.sungrow_inverter_1_export_limit_fallback",
+                 "number.sungrow_inverter_2_export_limit_fallback"
+                ]
+               }
+              ],
+              "color": "#EF6461",
+              "columns": [
+               "Inverter 1",
+               "Inverter 2"
+              ],
+              "dense": true
+             }
+            ]
+           },
+           {
+            "span": 1,
+            "groups": [
+             {
+              "title": "Battery and backup",
+              "rows": [
+               {
+                "label": "Min SoC",
+                "entities": [
+                 "number.sungrow_inverter_1_min_soc",
+                 "number.sungrow_inverter_2_min_soc"
+                ]
+               },
+               {
+                "label": "Max SoC",
+                "entities": [
+                 "number.sungrow_inverter_1_max_soc",
+                 "number.sungrow_inverter_2_max_soc"
+                ]
+               },
+               {
+                "label": "Max charge power",
+                "entities": [
+                 "number.sungrow_inverter_1_max_battery_charge_power",
+                 "number.sungrow_inverter_2_max_battery_charge_power"
+                ]
+               },
+               {
+                "label": "Max discharge power",
+                "entities": [
+                 "number.sungrow_inverter_1_max_battery_discharge_power",
+                 "number.sungrow_inverter_2_max_battery_discharge_power"
+                ]
+               },
+               {
+                "label": "Backup",
+                "entities": [
+                 "select.sungrow_inverter_1_backup_off_grid_option",
+                 "select.sungrow_inverter_2_backup_off_grid_option"
+                ]
+               },
+               {
+                "label": "Backup reserve",
+                "entities": [
+                 "number.sungrow_inverter_1_reserved_soc_for_backup",
+                 "number.sungrow_inverter_2_reserved_soc_for_backup"
+                ]
+               }
+              ],
+              "color": "#22B5A6",
+              "columns": [
+               "Inverter 1",
+               "Inverter 2"
+              ],
+              "dense": true
+             },
+             {
+              "title": "Grid limits",
+              "rows": [
+               {
+                "label": "Site import limit",
+                "entities": [
+                 "number.sungrow_inverter_1_site_import_limit",
+                 "number.sungrow_inverter_2_site_import_limit"
+                ]
+               }
+              ],
+              "color": "#EF6461",
+              "columns": [
+               "Inverter 1",
+               "Inverter 2"
+              ],
+              "dense": true
+             }
+            ]
+           },
+           {
+            "span": 2,
+            "groups": [
+             {
+              "title": "Mode",
+              "rows": [
+               {
+                "label": "System mode",
+                "entities": [
+                 "select.sungrow_inverter_1_system_mode",
+                 "select.sungrow_inverter_2_system_mode"
+                ],
+                "tones": {
+                 "Shutdown": "off",
+                 "Self-consumption": "on",
+                 "Forced charge": "on",
+                 "Forced discharge": "on"
+                }
+               },
+               {
+                "label": "EMS mode",
+                "entities": [
+                 "select.sungrow_inverter_1_ems_mode",
+                 "select.sungrow_inverter_2_ems_mode"
+                ]
+               },
+               {
+                "label": "Forced charge / discharge",
+                "entities": [
+                 "select.sungrow_inverter_1_forced_charge_discharge",
+                 "select.sungrow_inverter_2_forced_charge_discharge"
+                ],
+                "tones": {
+                 "Stop": "off",
+                 "Forced charge": "on",
+                 "Forced discharge": "on",
+                 "Charge": "on",
+                 "Discharge": "on"
+                }
+               },
+               {
+                "label": "Forced power",
+                "entities": [
+                 "number.sungrow_inverter_1_forced_charge_discharge_power",
+                 "number.sungrow_inverter_2_forced_charge_discharge_power"
+                ]
+               }
+              ],
+              "color": "#5B8DEF",
+              "columns": [
+               "Inverter 1",
+               "Inverter 2"
+              ],
+              "dense": true
+             },
+             {
+              "title": "Curtailment",
+              "rows": [
+               {
+                "label": "Solar limit",
+                "entities": [
+                 "select.sungrow_inverter_1_pv_power_limitation",
+                 "select.sungrow_inverter_2_pv_power_limitation"
+                ],
+                "tones": {
+                 "Limit PV": "on",
+                 "Allow PV": "off"
+                }
+               },
+               {
+                "label": "Export limit",
+                "entities": [
+                 "select.sungrow_inverter_1_feed_in_limitation",
+                 "select.sungrow_inverter_2_feed_in_limitation"
+                ]
+               },
+               {
+                "label": "Export limit, kW",
+                "entities": [
+                 "number.sungrow_inverter_1_export_power_limit",
+                 "number.sungrow_inverter_2_export_power_limit"
+                ]
+               },
+               {
+                "label": "Export limit, %",
+                "entities": [
+                 "number.sungrow_inverter_1_feed_in_limitation_ratio",
+                 "number.sungrow_inverter_2_feed_in_limitation_ratio"
+                ]
+               },
+               {
+                "label": "Export limit mode",
+                "entities": [
+                 "select.sungrow_inverter_1_export_limit_mode",
+                 "select.sungrow_inverter_2_export_limit_mode"
+                ]
+               },
+               {
+                "label": "Output limit",
+                "entities": [
+                 "select.sungrow_inverter_1_active_power_limitation",
+                 "select.sungrow_inverter_2_active_power_limitation"
+                ]
+               },
+               {
+                "label": "Output limit, kW",
+                "entities": [
+                 "number.sungrow_inverter_1_active_power_limit",
+                 "number.sungrow_inverter_2_active_power_limit"
+                ]
+               },
+               {
+                "label": "Output limit, %",
+                "entities": [
+                 "number.sungrow_inverter_1_active_power_limit_ratio",
+                 "number.sungrow_inverter_2_active_power_limit_ratio"
+                ]
+               },
+               {
+                "label": "Shut down at 0 %",
+                "entities": [
+                 "select.sungrow_inverter_1_shut_down_at_0_power_limit",
+                 "select.sungrow_inverter_2_shut_down_at_0_power_limit"
+                ]
+               }
+              ],
+              "color": "#EF6461",
+              "columns": [
+               "Inverter 1",
+               "Inverter 2"
+              ],
+              "dense": true
+             }
+            ]
+           }
+          ]
+         ]
+        }
+       ]
+      },
+      {
+       "id": "system",
+       "title": "System",
+       "subtitle": "Devices, firmware and diagnostics",
+       "cards": [
+        {
+         "type": "custom:sungrow-matrix-card",
+         "layout": [
+          [
+           {
+            "span": 1,
+            "groups": [
+             {
+              "title": "Inverters",
+              "rows": [
+               {
+                "label": "Model",
+                "entities": [
+                 "sensor.sungrow_inverter_1_model",
+                 "sensor.sungrow_inverter_2_model"
+                ]
+               },
+               {
+                "label": "Serial",
+                "entities": [
+                 "sensor.sungrow_inverter_1_serial_number",
+                 "sensor.sungrow_inverter_2_serial_number"
+                ]
+               },
+               {
+                "label": "Rated output",
+                "entities": [
+                 "sensor.sungrow_inverter_1_rated_output_power",
+                 "sensor.sungrow_inverter_2_rated_output_power"
+                ]
+               },
+               {
+                "label": "AC output, lifetime",
+                "entities": [
+                 "sensor.sungrow_inverter_1_total_output_energy",
+                 "sensor.sungrow_inverter_2_total_output_energy"
+                ]
+               },
+               {
+                "label": "Battery converter",
+                "entities": [
+                 "sensor.sungrow_inverter_1_battery_converter_rated_power",
+                 "sensor.sungrow_inverter_2_battery_converter_rated_power"
+                ]
+               },
+               {
+                "label": "Temperature",
+                "entities": [
+                 "sensor.sungrow_inverter_1_inverter_temperature",
+                 "sensor.sungrow_inverter_2_inverter_temperature"
+                ]
+               },
+               {
+                "label": "Grid frequency",
+                "entities": [
+                 "sensor.sungrow_inverter_1_grid_frequency",
+                 "sensor.sungrow_inverter_2_grid_frequency"
+                ]
+               },
+               {
+                "label": "Power factor",
+                "entities": [
+                 "sensor.sungrow_inverter_1_power_factor",
+                 "sensor.sungrow_inverter_2_power_factor"
+                ]
+               },
+               {
+                "label": "Reactive power",
+                "entities": [
+                 "sensor.sungrow_inverter_1_reactive_power",
+                 "sensor.sungrow_inverter_2_reactive_power"
+                ]
+               },
+               {
+                "label": "Export limit, min",
+                "entities": [
+                 "sensor.sungrow_inverter_1_export_limit_minimum",
+                 "sensor.sungrow_inverter_2_export_limit_minimum"
+                ]
+               },
+               {
+                "label": "Export limit, max",
+                "entities": [
+                 "sensor.sungrow_inverter_1_export_limit_maximum",
+                 "sensor.sungrow_inverter_2_export_limit_maximum"
+                ]
+               }
+              ],
+              "color": "#F2A93B",
+              "dense": true,
+              "columns": [
+               "Inverter 1",
+               "Inverter 2"
+              ]
+             }
+            ]
+           },
+           {
+            "span": 2,
+            "groups": [
+             {
+              "title": "Towers",
+              "rows": [
+               {
+                "label": "Tower 1",
+                "entities": [
+                 "sensor.sungrow_battery_tower_1_model",
+                 "sensor.sungrow_battery_tower_1_serial_number",
+                 "sensor.sungrow_battery_tower_1_firmware"
+                ]
+               },
+               {
+                "label": "Tower 2",
+                "entities": [
+                 "sensor.sungrow_battery_tower_2_model",
+                 "sensor.sungrow_battery_tower_2_serial_number",
+                 "sensor.sungrow_battery_tower_2_firmware"
+                ]
+               },
+               {
+                "label": "Tower 3",
+                "entities": [
+                 "sensor.sungrow_battery_tower_3_model",
+                 "sensor.sungrow_battery_tower_3_serial_number",
+                 "sensor.sungrow_battery_tower_3_firmware"
+                ]
+               },
+               {
+                "label": "Tower 4",
+                "entities": [
+                 "sensor.sungrow_battery_tower_4_model",
+                 "sensor.sungrow_battery_tower_4_serial_number",
+                 "sensor.sungrow_battery_tower_4_firmware"
+                ]
+               }
+              ],
+              "color": "#22B5A6",
+              "dense": true,
+              "columns": [
+               "Model",
+               "Serial",
+               "Firmware"
+              ]
+             },
+             {
+              "pair": [
+               {
+                "title": "Power-flow flags, held 60 s",
+                "rows": [
+                 {
+                  "label": "PV generating",
+                  "entities": [
+                   "binary_sensor.sungrow_inverter_1_pv_generating_60_s",
+                   "binary_sensor.sungrow_inverter_2_pv_generating_60_s"
+                  ]
+                 },
+                 {
+                  "label": "Battery charging",
+                  "entities": [
+                   "binary_sensor.sungrow_inverter_1_battery_charging_60_s",
+                   "binary_sensor.sungrow_inverter_2_battery_charging_60_s"
+                  ]
+                 },
+                 {
+                  "label": "Battery discharging",
+                  "entities": [
+                   "binary_sensor.sungrow_inverter_1_battery_discharging_60_s",
+                   "binary_sensor.sungrow_inverter_2_battery_discharging_60_s"
+                  ]
+                 },
+                 {
+                  "label": "Powering loads",
+                  "entities": [
+                   "binary_sensor.sungrow_inverter_1_powering_loads_60_s",
+                   "binary_sensor.sungrow_inverter_2_powering_loads_60_s"
+                  ]
+                 },
+                 {
+                  "label": "Exporting",
+                  "entities": [
+                   "binary_sensor.sungrow_inverter_1_exporting_power_60_s",
+                   "binary_sensor.sungrow_inverter_2_exporting_power_60_s"
+                  ]
+                 },
+                 {
+                  "label": "Importing",
+                  "entities": [
+                   "binary_sensor.sungrow_inverter_1_importing_power_60_s",
+                   "binary_sensor.sungrow_inverter_2_importing_power_60_s"
+                  ]
+                 },
+                 {
+                  "label": "Loads generating",
+                  "entities": [
+                   "binary_sensor.sungrow_inverter_1_loads_generating_60_s",
+                   "binary_sensor.sungrow_inverter_2_loads_generating_60_s"
+                  ]
+                 }
+                ],
+                "color": "#5B8DEF",
+                "dense": true,
+                "columns": [
+                 "Inverter 1",
+                 "Inverter 2"
+                ]
+               },
+               {
+                "title": "Inverters' own meter input",
+                "rows": [
+                 {
+                  "label": "Meter power",
+                  "entities": [
+                   "sensor.sungrow_inverter_1_meter_active_power",
+                   "sensor.sungrow_inverter_2_meter_active_power"
+                  ]
+                 },
+                 {
+                  "label": "Load power",
+                  "entities": [
+                   "sensor.sungrow_inverter_1_load_power",
+                   "sensor.sungrow_inverter_2_load_power"
+                  ]
+                 },
+                 {
+                  "label": "Import power",
+                  "entities": [
+                   "sensor.sungrow_inverter_1_import_power",
+                   "sensor.sungrow_inverter_2_import_power"
+                  ]
+                 },
+                 {
+                  "label": "Export power",
+                  "entities": [
+                   "sensor.sungrow_inverter_1_export_power",
+                   "sensor.sungrow_inverter_2_export_power"
+                  ]
+                 },
+                 {
+                  "label": "Frequency",
+                  "entities": [
+                   "sensor.sungrow_inverter_1_meter_frequency",
+                   "sensor.sungrow_inverter_2_meter_frequency"
+                  ]
+                 }
+                ],
+                "dim": true,
+                "dense": true,
+                "note": "Not connected here: the grid meter is wired to the Logger.",
+                "columns": [
+                 "Inverter 1",
+                 "Inverter 2"
+                ]
+               }
+              ]
+             }
+            ]
+           },
+           {
+            "span": 1,
+            "groups": [
+             {
+              "title": "Logger",
+              "rows": [
+               {
+                "label": "Model",
+                "entities": [
+                 "sensor.sungrow_logger_model"
+                ]
+               },
+               {
+                "label": "State",
+                "entities": [
+                 "sensor.sungrow_logger_state"
+                ]
+               },
+               {
+                "label": "Devices connected",
+                "entities": [
+                 "sensor.sungrow_logger_devices_connected"
+                ]
+               },
+               {
+                "label": "Faulty devices",
+                "entities": [
+                 "sensor.sungrow_logger_faulty_devices"
+                ]
+               },
+               {
+                "label": "Nominal power",
+                "entities": [
+                 "sensor.sungrow_logger_total_nominal_active_power"
+                ]
+               },
+               {
+                "label": "Max nominal power",
+                "entities": [
+                 "sensor.sungrow_logger_max_total_nominal_active_power"
+                ]
+               },
+               {
+                "label": "VPP heartbeat",
+                "entities": [
+                 "sensor.sungrow_logger_vpp_heartbeat"
+                ]
+               },
+               {
+                "label": "Feed-in limitation",
+                "entities": [
+                 "sensor.sungrow_logger_feed_in_limitation"
+                ]
+               },
+               {
+                "label": "Yield today",
+                "entities": [
+                 "sensor.sungrow_logger_daily_yield"
+                ]
+               },
+               {
+                "label": "Yield, lifetime",
+                "entities": [
+                 "sensor.sungrow_logger_total_yield"
+                ]
+               },
+               {
+                "label": "Reactive power",
+                "entities": [
+                 "sensor.sungrow_logger_total_reactive_power"
+                ]
+               }
+              ],
+              "color": "#5B8DEF",
+              "dense": true
+             },
+             {
+              "title": "Own meter input, per phase",
+              "rows": [
+               {
+                "label": "Inv 1 power",
+                "entities": [
+                 "sensor.sungrow_inverter_1_meter_phase_a_power",
+                 "sensor.sungrow_inverter_1_meter_phase_b_power",
+                 "sensor.sungrow_inverter_1_meter_phase_c_power"
+                ]
+               },
+               {
+                "label": "Inv 1 voltage",
+                "entities": [
+                 "sensor.sungrow_inverter_1_meter_phase_a_voltage",
+                 "sensor.sungrow_inverter_1_meter_phase_b_voltage",
+                 "sensor.sungrow_inverter_1_meter_phase_c_voltage"
+                ]
+               },
+               {
+                "label": "Inv 1 current",
+                "entities": [
+                 "sensor.sungrow_inverter_1_meter_phase_a_current",
+                 "sensor.sungrow_inverter_1_meter_phase_b_current",
+                 "sensor.sungrow_inverter_1_meter_phase_c_current"
+                ]
+               },
+               {
+                "label": "Inv 2 power",
+                "entities": [
+                 "sensor.sungrow_inverter_2_meter_phase_a_power",
+                 "sensor.sungrow_inverter_2_meter_phase_b_power",
+                 "sensor.sungrow_inverter_2_meter_phase_c_power"
+                ]
+               },
+               {
+                "label": "Inv 2 voltage",
+                "entities": [
+                 "sensor.sungrow_inverter_2_meter_phase_a_voltage",
+                 "sensor.sungrow_inverter_2_meter_phase_b_voltage",
+                 "sensor.sungrow_inverter_2_meter_phase_c_voltage"
+                ]
+               },
+               {
+                "label": "Inv 2 current",
+                "entities": [
+                 "sensor.sungrow_inverter_2_meter_phase_a_current",
+                 "sensor.sungrow_inverter_2_meter_phase_b_current",
+                 "sensor.sungrow_inverter_2_meter_phase_c_current"
+                ]
+               }
+              ],
+              "dim": true,
+              "dense": true,
+              "columns": [
+               "A",
+               "B",
+               "C"
+              ]
+             }
+            ]
+           }
+          ]
+         ]
+        },
+        {
+         "type": "custom:sungrow-charts",
+         "charts": [
+          {
+           "title": "Temperatures",
+           "color": "#F2A93B",
+           "ranges": [
+            "24h",
+            "7d",
+            "60d",
+            "360d"
+           ],
+           "views": [
+            {
+             "name": "Inverters and batteries",
+             "unit": "°C",
+             "series": [
+              {
+               "entity": "sensor.sungrow_inverter_1_inverter_temperature",
+               "label": "Inverter 1",
+               "color": "#F2A93B"
+              },
+              {
+               "entity": "sensor.sungrow_inverter_2_inverter_temperature",
+               "label": "Inverter 2",
+               "color": "#22B5A6"
+              },
+              {
+               "entity": "sensor.sungrow_inverter_1_battery_temperature",
+               "label": "Battery 1",
+               "color": "#F2A93B",
+               "dash": true
+              },
+              {
+               "entity": "sensor.sungrow_inverter_2_battery_temperature",
+               "label": "Battery 2",
+               "color": "#22B5A6",
+               "dash": true
+              }
+             ]
+            }
+           ],
+           "span": 4
+          }
+         ]
+        }
+       ]
+      },
+      {
+       "id": "help",
+       "title": "Help",
+       "subtitle": "What is on, and what everything means",
+       "cards": [
+        {
+         "type": "custom:sungrow-matrix-card",
+         "layout": [
+          [
+           {
+            "span": 3,
+            "groups": [
+             {
+              "title": "Right now: what is on",
+              "rows": [
+               {
+                "label": "System",
+                "entities": [
+                 "select.sungrow_inverter_1_system_mode",
+                 "select.sungrow_inverter_2_system_mode"
+                ],
+                "tones": {
+                 "Shutdown": "off",
+                 "Self-consumption": "on",
+                 "Forced charge": "on",
+                 "Forced discharge": "on"
+                },
+                "readonly": true
+               },
+               {
+                "label": "Forced charge / discharge",
+                "entities": [
+                 "select.sungrow_inverter_1_forced_charge_discharge",
+                 "select.sungrow_inverter_2_forced_charge_discharge"
+                ],
+                "tones": {
+                 "Stop": "off",
+                 "Forced charge": "on",
+                 "Forced discharge": "on",
+                 "Charge": "on",
+                 "Discharge": "on"
+                },
+                "readonly": true
+               },
+               {
+                "label": "Whole-home backup",
+                "entities": [
+                 "select.sungrow_inverter_1_backup_off_grid_option",
+                 "select.sungrow_inverter_2_backup_off_grid_option"
+                ],
+                "readonly": true
+               },
+               {
+                "label": "Solar limit",
+                "entities": [
+                 "select.sungrow_inverter_1_pv_power_limitation",
+                 "select.sungrow_inverter_2_pv_power_limitation"
+                ],
+                "tones": {
+                 "Limit PV": "on",
+                 "Allow PV": "off"
+                },
+                "readonly": true
+               },
+               {
+                "label": "Export limit",
+                "entities": [
+                 "select.sungrow_inverter_1_feed_in_limitation",
+                 "select.sungrow_inverter_2_feed_in_limitation"
+                ],
+                "readonly": true
+               },
+               {
+                "label": "Export limit mode",
+                "entities": [
+                 "select.sungrow_inverter_1_export_limit_mode",
+                 "select.sungrow_inverter_2_export_limit_mode"
+                ],
+                "readonly": true
+               },
+               {
+                "label": "Output limit",
+                "entities": [
+                 "select.sungrow_inverter_1_active_power_limitation",
+                 "select.sungrow_inverter_2_active_power_limitation"
+                ],
+                "readonly": true
+               },
+               {
+                "label": "Shut down at 0 %",
+                "entities": [
+                 "select.sungrow_inverter_1_shut_down_at_0_power_limit",
+                 "select.sungrow_inverter_2_shut_down_at_0_power_limit"
+                ],
+                "readonly": true
+               },
+               {
+                "label": "EMS mode",
+                "entities": [
+                 "select.sungrow_inverter_1_ems_mode",
+                 "select.sungrow_inverter_2_ems_mode"
+                ],
+                "readonly": true
+               }
+              ],
+              "color": "#22B5A6",
+              "note": "Green: the function is on. Red: it is off. No colour: a mode, not an on/off switch. Change any of them on Controls.",
+              "columns": [
+               "Inverter 1",
+               "Inverter 2"
+              ]
+             }
+            ]
+           },
+           {
+            "span": 1,
+            "groups": [
+             {
+              "title": "Right now: the site (Logger)",
+              "rows": [
+               {
+                "label": "EMS mode",
+                "entities": [
+                 "select.sungrow_logger_ems_mode"
+                ],
+                "readonly": true
+               },
+               {
+                "label": "Charge / discharge",
+                "entities": [
+                 "select.sungrow_logger_charge_discharge_command"
+                ],
+                "tones": {
+                 "Stop": "off",
+                 "Forced charge": "on",
+                 "Forced discharge": "on",
+                 "Charge": "on",
+                 "Discharge": "on"
+                },
+                "readonly": true
+               }
+              ],
+              "color": "#5B8DEF"
+             }
+            ]
+           }
+          ]
+         ]
+        },
+        {
+         "type": "custom:sungrow-help-card",
+         "sections": [
+          {
+           "title": "Reading this dashboard",
+           "color": "#22B5A6",
+           "text": [
+            "<span class=\"on\">Green</span> means a function is <b>on</b>: backup enabled, an export or output limit in force, solar limited, the inverter running, a forced charge or discharge under way.",
+            "<span class=\"off\">Red</span> means it is <b>off</b>: disabled, stopped, solar allowed, the inverter shut down. A mode such as EMS mode has no colour: it is a choice, not on or off.",
+            "<b>not reported</b>: the device has not answered that register yet. <b>unavailable</b>: no fresh reading for three of its read intervals (at least 30 s).",
+            "The dot at the top right is green while the house power keeps arriving, and red with the minutes since it stopped.",
+            "Every setting is written, then read back from the device; the box shows what the device kept. If it refuses, the reason appears beside the box."
+           ]
+          },
+          {
+           "title": "The pages",
+           "color": "#F2A93B",
+           "table": {
+            "head": [
+             "Page",
+             "What it shows"
+            ],
+            "rows": [
+             [
+              "Overview",
+              "Power flow through the house, today's energy, battery and towers"
+             ],
+             [
+              "Solar",
+              "Each inverter's MPPTs and strings, and the solar and export limits"
+             ],
+             [
+              "Battery",
+              "State of charge, the four towers, cell spread in mV, charge and discharge limits"
+             ],
+             [
+              "Grid",
+              "The grid meter per phase, import and export, the grid limits"
+             ],
+             [
+              "Backup",
+              "Whole-home backup output per inverter and phase"
+             ],
+             [
+              "Controls",
+              "Every setting the inverters and the Logger accept"
+             ],
+             [
+              "System",
+              "Models, serials, firmware, power-flow flags, diagnostics"
+             ]
+            ]
+           }
+          },
+          {
+           "title": "Controls: what each one does",
+           "color": "#EF6461",
+           "wide": true,
+           "text": [
+            "Register numbers are Sungrow's protocol numbers, as the PDF lists them (on the wire each is one lower)."
+           ],
+           "table": {
+            "head": [
+             "Control",
+             "What it does",
+             "Registers"
+            ],
+            "reg": 2,
+            "rows": [
+             [
+              "System mode",
+              "Starts or shuts down the inverter, and sets EMS mode and command together: Shutdown, Self-consumption, Forced charge, Forced discharge",
+              "13000, 13050, 13051"
+             ],
+             [
+              "EMS mode",
+              "How the inverter decides: Self-consumption, Forced mode, External EMS (the Logger decides) or VPP",
+              "13050"
+             ],
+             [
+              "Forced charge / discharge",
+              "In Forced mode: Stop, Forced charge or Forced discharge",
+              "13051"
+             ],
+             [
+              "Forced power",
+              "The power of a forced charge or discharge",
+              "13052"
+             ],
+             [
+              "Min SoC, Max SoC",
+              "The battery's lower and upper limits",
+              "13059, 13058"
+             ],
+             [
+              "Max charge / discharge power",
+              "The battery's power limits",
+              "33047, 33048"
+             ],
+             [
+              "Whole-home backup",
+              "Whether the inverter carries the backup circuits through a grid outage",
+              "13075"
+             ],
+             [
+              "Backup reserve",
+              "State of charge kept back for an outage",
+              "13100"
+             ],
+             [
+              "Solar limit",
+              "Limit PV stops solar production; Allow PV lets it run",
+              "13018"
+             ],
+             [
+              "Export limit",
+              "Caps export to the grid at the export limit (kW or %)",
+              "13087; 13074 kW, 13088 %"
+             ],
+             [
+              "Export limit mode",
+              "Enabled (the total), Enabled per phase, or Disabled",
+              "13087, 31226"
+             ],
+             [
+              "Output limit",
+              "Caps the inverter's whole AC output (kW or %)",
+              "31204, 31205"
+             ],
+             [
+              "Shut down at 0 %",
+              "Whether a 0 % output limit shuts the inverter down",
+              "31213"
+             ],
+             [
+              "Site import limit",
+              "Caps power drawn from the grid",
+              "32998"
+             ],
+             [
+              "Power rising / decline gradient",
+              "How fast output may rise or fall (0-1200, in steps of 25)",
+              "31202, 31201"
+             ],
+             [
+              "Fallbacks",
+              "The protocol's fallback values for the export limit and both gradients",
+              "31208, 31210, 31209"
+             ],
+             [
+              "Logger EMS mode, charge / discharge, power",
+              "The same decisions for the whole site, through the Logger",
+              "8024, 8025, 8026"
+             ],
+             [
+              "Logger feed-in limit",
+              "The site's export cap",
+              "8029"
+             ]
+            ]
+           }
+          },
+          {
+           "title": "The integration's own settings",
+           "color": "#5B8DEF",
+           "text": [
+            "Settings → Devices &amp; services → <b>Sungrow</b> → <b>Configure</b>:"
+           ],
+           "table": {
+            "head": [
+             "Setting",
+             "What it does"
+            ],
+            "rows": [
+             [
+              "Read only",
+              "Nothing is ever written to the inverters or the Logger; every control refuses"
+             ],
+             [
+              "Gentle pace",
+              "Every reading ten times slower, for running beside another Modbus client on the same Logger"
+             ],
+             [
+              "Own entities",
+              "This integration's own readings and controls (these pages). Off after a move from Modbus YAML, so the house starts with exactly the entities it had"
+             ]
+            ]
+           }
+          },
+          {
+           "title": "Units",
+           "color": "#9B87F5",
+           "text": [
+            "Power in <b>kW</b> to 3 decimals (the inverter's 1 W resolution), energy in <b>kWh</b> to 1 decimal (the registers count 0.1 kWh), and the cell spread in <b>mV</b>, the only mV figure."
+           ]
+          },
+          {
+           "title": "Something wrong?",
+           "color": "#8a93a3",
+           "text": [
+            "Settings → System → <b>Logs</b>, search <code>sungrow_sh_t</code>: a refused register, a lost connection or a slow read is named there.",
+            "If the dot at the top is red, the Logger is not answering: check it is powered and on the network.",
+            "Report it at <a href=\"https://github.com/code-imstillalive/sungrow-alive/issues\" target=\"_blank\" rel=\"noopener\">the integration's issues</a>, with the log lines."
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ],
+     "inverters": [
+      1,
+      2
+     ],
+     "towers": [
+      1,
+      2,
+      3,
+      4
+     ],
+     "live": [
+      "sensor.sungrow_logger_load_power",
+      "sensor.sungrow_grid_meter_grid_power",
+      "sensor.sungrow_inverter_1_pv_power",
+      "sensor.sungrow_inverter_2_pv_power"
+     ]
+    }
+   ]
+  }
+ ]
+}

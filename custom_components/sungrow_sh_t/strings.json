@@ -1,0 +1,120 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Sungrow Logger",
+        "description": "The Logger's address. Every inverter, battery tower and meter behind it is found next and shown before anything is kept.",
+        "data": {
+          "host": "Logger address",
+          "port": "First port",
+          "ports": "Ports to search"
+        },
+        "data_description": {
+          "host": "Its IP address or host name on your network.",
+          "port": "502 for most Loggers.",
+          "ports": "A Logger1000 can give each device its own port after the first; 8 covers that. Use 1 if everything answers on the first port."
+        }
+      },
+      "confirm": {
+        "title": "Found on the Logger",
+        "description": "{devices}\n\nSearched in {seconds} s. Submit to keep these; nothing has been written to any device. On a new search, every device found before keeps its name and entity ids."
+      }
+    },
+    "progress": {
+      "discover": "Searching the Logger: asking each port and address what it is. This takes a few seconds, up to a few minutes on a slow link."
+    },
+    "error": {
+      "nothing_found": "Nothing on that address answered as a Sungrow Logger, inverter, battery tower or meter. Check the address, that Modbus TCP is enabled on the Logger, and the ports."
+    },
+    "abort": {
+      "already_configured": "This Logger is already set up.",
+      "reconfigure_successful": "Searched again; the devices are updated. Each device's page now shows its serial number and where it is connected."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Sungrow",
+        "description": "To search the Logger again (a device added, moved or replaced), use Reconfigure on the integration's page instead.",
+        "menu_options": {
+          "settings": "Settings",
+          "towers": "Battery towers",
+          "forget": "Forget a device"
+        }
+      },
+      "settings": {
+        "title": "Settings",
+        "description": "Read only: nothing is ever written to the inverters or the Logger. Gentle: every reading ten times slower and no fast follow-up after a command, for running beside another Modbus client on the same Logger. Own entities: every reading and control of the inverters, meter, Logger and towers under this integration's names (off after a move from YAML, so the house starts with exactly the entities it had).",
+        "data": {
+          "read_only": "Read only",
+          "gentle": "Gentle pace",
+          "own_entities": "This integration's own entities"
+        }
+      },
+      "towers": {
+        "title": "Battery towers",
+        "description": "Which inverter each tower's battery stack is connected to. Each tower's device page then sits under that inverter, and the dashboard's tower temperature is that inverter's battery stack reading.\n\n{towers}\n\nA tower not chosen before shows the inverter whose battery voltage it matches right now.",
+        "data": {
+          "tower_1": "Battery tower 1",
+          "tower_2": "Battery tower 2",
+          "tower_3": "Battery tower 3",
+          "tower_4": "Battery tower 4",
+          "tower_5": "Battery tower 5",
+          "tower_6": "Battery tower 6",
+          "tower_7": "Battery tower 7",
+          "tower_8": "Battery tower 8",
+          "tower_9": "Battery tower 9",
+          "tower_10": "Battery tower 10",
+          "tower_11": "Battery tower 11",
+          "tower_12": "Battery tower 12",
+          "tower_13": "Battery tower 13",
+          "tower_14": "Battery tower 14",
+          "tower_15": "Battery tower 15",
+          "tower_16": "Battery tower 16"
+        }
+      },
+      "forget": {
+        "title": "Forget a device",
+        "description": "For a device that has been taken away for good. It is removed with its entities and their history links. A device that only missed a search is kept anyway; one that comes back is found by the next search (Reconfigure).",
+        "data": {
+          "devices": "Devices to forget"
+        }
+      }
+    },
+    "abort": {
+      "no_towers": "No battery towers were found on this Logger."
+    }
+  },
+  "services": {
+    "write_register": {
+      "name": "Write register",
+      "description": "Write holding registers through the Sungrow scheduler, by the hub name a former Modbus YAML package used.",
+      "fields": {
+        "hub": {
+          "name": "Hub",
+          "description": "The hub's name under sungrow_sh_t: in YAML."
+        },
+        "address": {
+          "name": "Address",
+          "description": "Register address (as on the wire: protocol number minus one)."
+        },
+        "value": {
+          "name": "Value",
+          "description": "One value, or a list for several registers."
+        },
+        "slave": {
+          "name": "Device address",
+          "description": "The Modbus device address (unit)."
+        },
+        "device_address": {
+          "name": "Device address",
+          "description": "Same as slave."
+        },
+        "unit": {
+          "name": "Device address",
+          "description": "Same as slave."
+        }
+      }
+    }
+  }
+}

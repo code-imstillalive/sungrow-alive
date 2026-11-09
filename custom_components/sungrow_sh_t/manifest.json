@@ -1,0 +1,19 @@
+{
+  "domain": "sungrow_sh_t",
+  "name": "Sungrow Alive",
+  "codeowners": [
+    "@code-imstillalive"
+  ],
+  "config_flow": true,
+  "dependencies": [
+    "frontend",
+    "http",
+    "modbus"
+  ],
+  "documentation": "https://github.com/code-imstillalive/sungrow-alive",
+  "integration_type": "hub",
+  "iot_class": "local_polling",
+  "issue_tracker": "https://github.com/code-imstillalive/sungrow-alive/issues",
+  "requirements": [],
+  "version": "0.1.0"
+}

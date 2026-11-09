@@ -1,0 +1,35 @@
+write_register:
+  fields:
+    hub:
+      required: true
+      selector:
+        text:
+    address:
+      required: true
+      selector:
+        number:
+          min: 0
+          max: 65535
+          mode: box
+    value:
+      required: true
+      selector:
+        object:
+    slave:
+      selector:
+        number:
+          min: 0
+          max: 255
+          mode: box
+    device_address:
+      selector:
+        number:
+          min: 0
+          max: 255
+          mode: box
+    unit:
+      selector:
+        number:
+          min: 0
+          max: 255
+          mode: box

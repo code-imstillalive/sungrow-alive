@@ -1,0 +1,2 @@
+custom_components/sungrow_sh_t/www/vendor/* -text
+custom_components/sungrow_sh_t/www/models/** -text
