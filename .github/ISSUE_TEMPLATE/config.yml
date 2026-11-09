@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Testing guide
+    url: https://github.com/code-imstillalive/sungrow-alive/blob/main/docs/testing.md
+    about: What to try first, and what to send with a report.

@@ -38,6 +38,13 @@ category *Integration*. Install **Sungrow Alive**, then restart Home Assistant.
 
 **By hand:** copy `custom_components/sungrow_sh_t` into your `config/custom_components/` and restart.
 
+## Testing it
+
+New to it? Read the [testing guide](docs/testing.md): start in *Read only*, check the search and the
+readings against the Sungrow app, then report what you find. Each report should carry the
+diagnostics file (**⋮ → Download diagnostics** on the integration's page), which has serial numbers
+and the Logger's address removed.
+
 ## Setting up
 
 **Settings → Devices & services → Add integration → Sungrow Alive.** Give the Logger's address. The

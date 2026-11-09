@@ -1,0 +1,28 @@
+name: My setup works (or partly works)
+description: Tell us what you ran it on. Every confirmed setup helps the next person.
+labels: [setup report]
+body:
+  - type: textarea
+    id: setup
+    attributes:
+      label: Your setup
+      description: Logger model and firmware; inverters; battery towers; meter.
+    validations:
+      required: true
+  - type: dropdown
+    id: found
+    attributes:
+      label: Did the search find every device?
+      options: ["Yes, all of them", "Some were missing", "It found something that is not there"]
+    validations:
+      required: true
+  - type: textarea
+    id: notes
+    attributes:
+      label: Anything that looked off
+      description: Readings that differ from the Sungrow app, entities that stay unavailable, slow or busy Logger.
+  - type: textarea
+    id: diagnostics
+    attributes:
+      label: Diagnostics (optional)
+      description: Settings → Devices & services → Sungrow Alive → ⋮ → Download diagnostics, then drag the file here.
