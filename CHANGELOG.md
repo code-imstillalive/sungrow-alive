@@ -6,6 +6,16 @@ What changed in each release of Sungrow Alive. The format follows
 
 ## [Unreleased]
 
+## [0.1.3] - 2026-11-10
+
+- **The stuck "Custom element doesn't exist: sungrow-app" after a refresh, fixed
+  properly.** 0.1.2 asked the error card to rebuild; on Home Assistant 2026.10's
+  panel view that request is ignored (tested on the install: the error card was
+  found and asked, and stayed). The cards now replace such an error card with
+  the real one themselves and keep it fed with Home Assistant's live state,
+  looking every second for 30 s after loading and after each move between
+  dashboards.
+
 ## [0.1.2] - 2026-11-10
 
 - **The Sungrow dashboard no longer sticks on "Custom element doesn't exist:
@@ -42,7 +52,8 @@ The first public release.
 - A move from a Modbus YAML package keeps every entity id.
 - A ready-made Sungrow dashboard.
 
-[Unreleased]: https://github.com/code-imstillalive/sungrow-alive/compare/v0.1.2...HEAD
+[Unreleased]: https://github.com/code-imstillalive/sungrow-alive/compare/v0.1.3...HEAD
+[0.1.3]: https://github.com/code-imstillalive/sungrow-alive/compare/v0.1.2...v0.1.3
 [0.1.2]: https://github.com/code-imstillalive/sungrow-alive/compare/v0.1.1...v0.1.2
 [0.1.1]: https://github.com/code-imstillalive/sungrow-alive/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/code-imstillalive/sungrow-alive/releases/tag/v0.1.0

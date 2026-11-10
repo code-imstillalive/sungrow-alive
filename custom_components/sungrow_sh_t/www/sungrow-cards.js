@@ -1556,27 +1556,53 @@ window.customCards.push({ type: "sungrow-app", name: "Sungrow app", description:
 
 /*
  * A dashboard built before this file finished loading shows Home Assistant's
- * "Custom element doesn't exist: sungrow-app" and, on a panel view, does not
- * build it again when the element arrives (a plain F5 at a wide window, 10 Nov
- * 2026; a resize, which rebuilds, brought it back). Ask each such error card to
- * rebuild, as Home Assistant's own "ll-rebuild" does, now and over the next few
- * seconds while the dashboard settles.
+ * "Custom element doesn't exist: sungrow-app", and on Home Assistant 2026.10's
+ * panel view it never builds the card again: neither its own "ll-rebuild" nor
+ * a "config-refresh" brought it back, though a resize did (10 Nov 2026, a plain
+ * F5 at a wide window, about one load in seven). So the cards replace such an
+ * error card with the real one themselves, and keep it fed with Home
+ * Assistant's live state until the dashboard rebuilds it properly. They look
+ * every second for 30 s after load and after each move between dashboards.
  */
-function sungrowRebuildMissing() {
-  const ours = /sungrow-/;
+function sungrowReplaceMissing() {
+  const ha = document.querySelector("home-assistant");
+  if (!ha || !ha.hass) return 0;
   const seen = new Set();
+  let replaced = 0;
   const walk = (node) => {
     if (!node || seen.has(node)) return;
     seen.add(node);
-    for (const el of node.querySelectorAll ? node.querySelectorAll("*") : []) {
-      if (el.localName === "hui-error-card") {
-        const cfg = el._config || el.config || {};
-        const text = `${JSON.stringify(cfg.origConfig || cfg)} ${el.shadowRoot ? el.shadowRoot.textContent : ""}`;
-        if (ours.test(text)) el.dispatchEvent(new CustomEvent("ll-rebuild", { bubbles: true, composed: true }));
+    for (const el of node.querySelectorAll ? [...node.querySelectorAll("*")] : []) {
+      if (/error/.test(el.localName)) {
+        const c = el._config || el.config || {};
+        const cfg = c.origConfig || c.config;
+        const said = `${el.shadowRoot ? el.shadowRoot.textContent : ""} ${el.textContent || ""}`;
+        const type = cfg && typeof cfg.type === "string" ? cfg.type
+          : (/sungrow-app/.test(said) ? "custom:sungrow-app" : "");
+        const tag = type.replace(/^custom:/, "");
+        if (/^sungrow-/.test(tag) && customElements.get(tag)) {
+          const card = document.createElement(tag);
+          card.setConfig(cfg && cfg.type ? cfg : { type });
+          card.hass = ha.hass;
+          el.replaceWith(card);
+          let last = ha.hass;
+          const feed = setInterval(() => {
+            if (!card.isConnected) { clearInterval(feed); return; }
+            if (ha.hass !== last) { last = ha.hass; card.hass = last; }
+          }, 1000);
+          replaced += 1;
+        }
       }
       if (el.shadowRoot) walk(el.shadowRoot);
     }
   };
   walk(document);
+  return replaced;
 }
-for (const ms of [0, 500, 1500, 4000]) setTimeout(sungrowRebuildMissing, ms);
+function sungrowWatch(seconds) {
+  let left = seconds;
+  const tick = () => { sungrowReplaceMissing(); if (--left > 0) setTimeout(tick, 1000); };
+  tick();
+}
+sungrowWatch(30);
+window.addEventListener("location-changed", () => sungrowWatch(30));
