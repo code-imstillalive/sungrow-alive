@@ -6,6 +6,13 @@ What changed in each release of Sungrow Alive. The format follows
 
 ## [Unreleased]
 
+## [0.1.5] - 2026-11-10
+
+- **An icon:** an orange sun with a heartbeat line across it, in
+  `brand/icon.png` (256 × 256) and `brand/icon@2x.png` (512 × 512), PNG with
+  transparency and trimmed to the artwork, as Home Assistant's brand rules ask.
+  Its own design: it shares the colour, not Sungrow's wordmark.
+
 ## [0.1.4] - 2026-11-10
 
 - **No more "Custom element doesn't exist: sungrow-app" after a refresh.** The
@@ -70,7 +77,8 @@ The first public release.
 - A move from a Modbus YAML package keeps every entity id.
 - A ready-made Sungrow dashboard.
 
-[Unreleased]: https://github.com/code-imstillalive/sungrow-alive/compare/v0.1.4...HEAD
+[Unreleased]: https://github.com/code-imstillalive/sungrow-alive/compare/v0.1.5...HEAD
+[0.1.5]: https://github.com/code-imstillalive/sungrow-alive/compare/v0.1.4...v0.1.5
 [0.1.4]: https://github.com/code-imstillalive/sungrow-alive/compare/v0.1.3...v0.1.4
 [0.1.3]: https://github.com/code-imstillalive/sungrow-alive/compare/v0.1.2...v0.1.3
 [0.1.2]: https://github.com/code-imstillalive/sungrow-alive/compare/v0.1.1...v0.1.2
