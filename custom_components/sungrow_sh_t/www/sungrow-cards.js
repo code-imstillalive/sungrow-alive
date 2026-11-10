@@ -1521,7 +1521,7 @@ class SungrowApp extends HTMLElement {
     const root = this.shadowRoot || this.attachShadow({ mode: "open" });
     const page = this._cfg.pages.find((p) => p.id === this._page);
     const nav = this._cfg.pages.map((p) => `<button data-page="${p.id}" ${p.id === this._page ? 'aria-current="page"' : ""}><svg viewBox="0 0 24 24"><path d="${ICONS[p.icon || p.id] || ICONS.overview}"/></svg><span>${p.title}</span></button>`).join("");
-    root.innerHTML = `<style>${APP_STYLE}</style><div class="app"><header><div class="bar"><div class="brand"><b>${this._cfg.title || "Sungrow"}</b><span>${page.subtitle || ""}</span></div><div class="live" id="live"><i></i><span id="live-text">Live</span></div><nav>${nav}</nav></div></header><main id="main"></main></div>`;
+    root.innerHTML = `<style>${APP_STYLE}</style><div class="app"><header><div class="bar"><div class="brand"><b>${this._cfg.title || "Sungrow Alive"}</b><span>${page.subtitle || ""}</span></div><div class="live" id="live"><i></i><span id="live-text">Live</span></div><nav>${nav}</nav></div></header><main id="main"></main></div>`;
     root.querySelector("nav").addEventListener("click", (e) => { const b = e.target.closest("button[data-page]"); if (b) this._go(b.dataset.page); });
     const main = root.getElementById("main");
     this._children = page.cards.map((c) => {
@@ -1553,3 +1553,30 @@ class SungrowApp extends HTMLElement {
 
 customElements.get("sungrow-app") || customElements.define("sungrow-app", SungrowApp);
 window.customCards.push({ type: "sungrow-app", name: "Sungrow app", description: "The whole Sungrow dashboard as one page" });
+
+/*
+ * A dashboard built before this file finished loading shows Home Assistant's
+ * "Custom element doesn't exist: sungrow-app" and, on a panel view, does not
+ * build it again when the element arrives (a plain F5 at a wide window, 10 Nov
+ * 2026; a resize, which rebuilds, brought it back). Ask each such error card to
+ * rebuild, as Home Assistant's own "ll-rebuild" does, now and over the next few
+ * seconds while the dashboard settles.
+ */
+function sungrowRebuildMissing() {
+  const ours = /sungrow-/;
+  const seen = new Set();
+  const walk = (node) => {
+    if (!node || seen.has(node)) return;
+    seen.add(node);
+    for (const el of node.querySelectorAll ? node.querySelectorAll("*") : []) {
+      if (el.localName === "hui-error-card") {
+        const cfg = el._config || el.config || {};
+        const text = `${JSON.stringify(cfg.origConfig || cfg)} ${el.shadowRoot ? el.shadowRoot.textContent : ""}`;
+        if (ours.test(text)) el.dispatchEvent(new CustomEvent("ll-rebuild", { bubbles: true, composed: true }));
+      }
+      if (el.shadowRoot) walk(el.shadowRoot);
+    }
+  };
+  walk(document);
+}
+for (const ms of [0, 500, 1500, 4000]) setTimeout(sungrowRebuildMissing, ms);

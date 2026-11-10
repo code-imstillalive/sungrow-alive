@@ -549,9 +549,9 @@ def build(inverters: list[int], towers: list[int], stacks: dict[int, tuple[int, 
     for pg in pages:  # each page's history charts sit under its tables
         if pg["id"] in extra:
             pg["cards"].append(extra[pg["id"]]())
-    app = {"type": "custom:sungrow-app", "title": "Sungrow", "pages": pages, "inverters": list(INV), "towers": list(TOWERS),
+    app = {"type": "custom:sungrow-app", "title": "Sungrow Alive", "pages": pages, "inverters": list(INV), "towers": list(TOWERS),
            "live": ["sensor.sungrow_logger_load_power", "sensor.sungrow_grid_meter_grid_power", *(f"sensor.sungrow_inverter_{n}_pv_power" for n in INV)]}
-    return {"title": "Sungrow", "views": [{"title": "Sungrow", "path": "app", "icon": "mdi:solar-power-variant", "type": "panel", "cards": [app]}]}
+    return {"title": "Sungrow Alive", "views": [{"title": "Sungrow Alive", "path": "app", "icon": "mdi:solar-power-variant", "type": "panel", "cards": [app]}]}
 
 
 _ID = re.compile(r"^(sensor|binary_sensor|number|select|switch)\.[a-z0-9_]+$")
