@@ -1557,52 +1557,62 @@ window.customCards.push({ type: "sungrow-app", name: "Sungrow app", description:
 /*
  * A dashboard built before this file finished loading shows Home Assistant's
  * "Custom element doesn't exist: sungrow-app", and on Home Assistant 2026.10's
- * panel view it never builds the card again: neither its own "ll-rebuild" nor
- * a "config-refresh" brought it back, though a resize did (10 Nov 2026, a plain
- * F5 at a wide window, about one load in seven). So the cards replace such an
- * error card with the real one themselves, and keep it fed with Home
- * Assistant's live state until the dashboard rebuilds it properly. They look
- * every second for 30 s after load and after each move between dashboards.
+ * panel view it never builds the card again: its own "ll-rebuild" was ignored
+ * (10 Nov 2026, a plain F5 at a wide window, about one load in seven; a resize,
+ * which rebuilds, brought it back). Swapping the error card for the real card
+ * worked for a moment, but its hui-card still holds the error card and puts it
+ * back on the next update. So the card's hui-card is handed its own config
+ * again, which makes it build the card itself, now that the element exists;
+ * where there is no hui-card the error card is swapped. The error card's own
+ * fields are renamed in production builds, so ours is recognised by its
+ * hui-card's config or by its text ("... doesn't exist: sungrow-app.").
+ * Looked for every second for 60 s after load and after each move between
+ * dashboards.
  */
-function sungrowReplaceMissing() {
+function sungrowFixMissing() {
   const ha = document.querySelector("home-assistant");
   if (!ha || !ha.hass) return 0;
+  const host = (el) => {
+    for (let n = el, hops = 0; n && hops < 12; hops += 1) {
+      n = n.parentNode || (n.getRootNode && n.getRootNode().host);
+      if (n && n.localName === "hui-card") return n;
+    }
+    return null;
+  };
   const seen = new Set();
-  let replaced = 0;
+  let fixed = 0;
   const walk = (node) => {
     if (!node || seen.has(node)) return;
     seen.add(node);
     for (const el of node.querySelectorAll ? [...node.querySelectorAll("*")] : []) {
-      if (/error/.test(el.localName)) {
-        const c = el._config || el.config || {};
-        const cfg = c.origConfig || c.config;
-        const said = `${el.shadowRoot ? el.shadowRoot.textContent : ""} ${el.textContent || ""}`;
-        const type = cfg && typeof cfg.type === "string" ? cfg.type
-          : (/sungrow-app/.test(said) ? "custom:sungrow-app" : "");
+      if (el.localName === "hui-error-card") {
+        const card = host(el);
+        const cfg = card && card.config && typeof card.config.type === "string" ? card.config : null;
+        const said = `${el.shadowRoot ? el.shadowRoot.textContent : ""} ${el.textContent || ""}`.match(/sungrow-[a-z-]+/);
+        const type = cfg ? cfg.type : (said ? `custom:${said[0]}` : "");
         const tag = type.replace(/^custom:/, "");
         if (/^sungrow-/.test(tag) && customElements.get(tag)) {
-          const card = document.createElement(tag);
-          card.setConfig(cfg && cfg.type ? cfg : { type });
-          card.hass = ha.hass;
-          el.replaceWith(card);
-          let last = ha.hass;
-          const feed = setInterval(() => {
-            if (!card.isConnected) { clearInterval(feed); return; }
-            if (ha.hass !== last) { last = ha.hass; card.hass = last; }
-          }, 1000);
-          replaced += 1;
+          if (cfg) {
+            card.config = { ...cfg };
+          } else {
+            const real = document.createElement(tag);
+            real.setConfig({ type });
+            real.hass = ha.hass;
+            el.replaceWith(real);
+          }
+          fixed += 1;
         }
       }
       if (el.shadowRoot) walk(el.shadowRoot);
     }
   };
   walk(document);
-  return replaced;
+  return fixed;
 }
 function sungrowWatch(seconds) {
   let left = seconds;
-  const tick = () => { sungrowReplaceMissing(); if (--left > 0) setTimeout(tick, 1000); };
+  const tick = () => { sungrowFixMissing(); if (--left > 0) setTimeout(tick, 1000); };
   tick();
 }
-sungrowWatch(30);
-window.addEventListener("location-changed", () => sungrowWatch(30));
+sungrowWatch(60);
+window.addEventListener("location-changed", () => sungrowWatch(60));
