@@ -195,7 +195,42 @@ async def _register_cards(hass: HomeAssistant) -> None:
     www = Path(__file__).parent / "www"
     version = int(await hass.async_add_executor_job(lambda: max(f.stat().st_mtime for f in www.glob("*.js"))))
     await hass.http.async_register_static_paths([StaticPathConfig("/sungrow_sh_t", str(www), False)])
-    add_extra_js_url(hass, f"{CARDS_URL}?v={version}")
+    url = f"{CARDS_URL}?v={version}"
+    try:
+        registered = await _async_card_resource(hass, url)
+    except Exception:  # noqa: BLE001 - the extra module below still loads the cards
+        _LOGGER.debug("Sungrow: dashboard resource not registered", exc_info=True)
+        registered = False
+    if not registered:
+        add_extra_js_url(hass, url)
+
+
+async def _async_card_resource(hass: HomeAssistant, url: str) -> bool:
+    """The cards as a dashboard resource, as HACS cards load; True when done.
+
+    Loaded as Home Assistant's extra module, the cards lost a race on a plain
+    refresh: a dashboard built a moment before them showed "Custom element
+    doesn't exist: sungrow-app" and, on a panel view, never built them again
+    (10 Nov 2026). As a dashboard resource they did not. An existing resource
+    for this file (one added by hand) is brought to the current version rather
+    than added twice. False on a dashboard in YAML mode, which has no resource
+    store: the caller then uses the extra module."""
+    data = hass.data.get("lovelace")
+    resources = getattr(data, "resources", None)
+    if resources is None and isinstance(data, dict):
+        resources = data.get("resources")
+    if resources is None or not hasattr(resources, "async_create_item"):
+        return False
+    if not getattr(resources, "loaded", True):
+        await resources.async_load()
+        resources.loaded = True
+    for item in resources.async_items():
+        if str(item.get("url", "")).split("?")[0] == CARDS_URL:
+            if item.get("url") != url:
+                await resources.async_update_item(item["id"], {"res_type": "module", "url": url})
+            return True
+    await resources.async_create_item({"res_type": "module", "url": url})
+    return True
 
 
 def _take_over_ids(hass: HomeAssistant, entry: ConfigEntry, legacy: L.LegacyConfig) -> None:

@@ -6,6 +6,24 @@ What changed in each release of Sungrow Alive. The format follows
 
 ## [Unreleased]
 
+## [0.1.4] - 2026-11-10
+
+- **No more "Custom element doesn't exist: sungrow-app" after a refresh.** The
+  cards were loaded as Home Assistant's extra module, which can arrive after a
+  dashboard is built; on a panel view Home Assistant then never builds the card
+  again. The integration now registers the cards as a **dashboard resource**,
+  the way HACS cards load, and adds the extra module only where there is no
+  resource store (a dashboard in YAML mode). A resource for the file added by
+  hand is updated to the current version, not added twice. Adding that resource
+  by hand stopped the fault on the install where it happened.
+- The 0.1.2 and 0.1.3 rebuild and swap workarounds are removed; neither worked
+  on Home Assistant 2026.10's panel view.
+- **3D house: the grid line shows which way power goes**: red while importing,
+  green while exporting (the cards' own import and export colours), and the
+  usual faint blue when the grid is idle.
+- The integration now depends on Home Assistant's `lovelace`, so its resource
+  store is ready first.
+
 ## [0.1.3] - 2026-11-10
 
 - **The stuck "Custom element doesn't exist: sungrow-app" after a refresh, fixed
@@ -52,7 +70,8 @@ The first public release.
 - A move from a Modbus YAML package keeps every entity id.
 - A ready-made Sungrow dashboard.
 
-[Unreleased]: https://github.com/code-imstillalive/sungrow-alive/compare/v0.1.3...HEAD
+[Unreleased]: https://github.com/code-imstillalive/sungrow-alive/compare/v0.1.4...HEAD
+[0.1.4]: https://github.com/code-imstillalive/sungrow-alive/compare/v0.1.3...v0.1.4
 [0.1.3]: https://github.com/code-imstillalive/sungrow-alive/compare/v0.1.2...v0.1.3
 [0.1.2]: https://github.com/code-imstillalive/sungrow-alive/compare/v0.1.1...v0.1.2
 [0.1.1]: https://github.com/code-imstillalive/sungrow-alive/compare/v0.1.0...v0.1.1
