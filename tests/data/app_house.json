@@ -1,15 +1,15 @@
 {
- "title": "Sungrow",
+ "title": "Sungrow Alive",
  "views": [
   {
-   "title": "Sungrow",
+   "title": "Sungrow Alive",
    "path": "app",
    "icon": "mdi:solar-power-variant",
    "type": "panel",
    "cards": [
     {
      "type": "custom:sungrow-app",
-     "title": "Sungrow",
+     "title": "Sungrow Alive",
      "pages": [
       {
        "id": "overview",
