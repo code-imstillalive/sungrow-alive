@@ -8,6 +8,7 @@
   "dependencies": [
     "frontend",
     "http",
+    "lovelace",
     "modbus"
   ],
   "documentation": "https://github.com/code-imstillalive/sungrow-alive",
@@ -15,5 +16,5 @@
   "iot_class": "local_polling",
   "issue_tracker": "https://github.com/code-imstillalive/sungrow-alive/issues",
   "requirements": [],
-  "version": "0.1.3"
+  "version": "0.1.4"
 }

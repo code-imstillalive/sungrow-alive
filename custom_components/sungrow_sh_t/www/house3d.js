@@ -5,6 +5,8 @@
 import * as THREE from "./vendor/three.module.min.js";
 
 const COL = { solar: 0xf2a93b, battery: 0x22b5a6, grid: 0x5b8def, home: 0x9b87f5, ev: 0x3fb37f };
+/* the grid line shows which way power goes: the cards' own import red and export green */
+const GRID_IMPORT = 0xef6461, GRID_EXPORT = 0x3fb37f;
 
 const THEME = {
   light: { wall: 0xf4f5f7, wallSide: 0xe6e9ee, trim: 0xd9dde3, roof: 0x3a3f48, panel: 0x1d2635, ground: 0xe9edf2, glass: 0x9fb2c8, lit: 0xffd48a, car: 0x4f6b88, sky: 0xf2f6ff, groundLight: 0xc9ced6, sun: 2.6, hemi: 1.35, shadow: 0.22 },
@@ -510,7 +512,7 @@ export function mountHouse(container, opts = {}) {
     tex.repeat.set(Math.max(2, Math.round(curve.getLength() / 1.6)), 1);
     const glow = new THREE.Mesh(new THREE.TubeGeometry(curve, 96, 0.09, 10), new THREE.MeshBasicMaterial({ color: COL[k], map: tex, transparent: true, opacity: 0, blending: THREE.AdditiveBlending, depthWrite: false }));
     scene.add(base, glow);
-    flows[k] = { tex, glow, speed: 0, dir: 1 };
+    flows[k] = { tex, glow, base, speed: 0, dir: 1 };
   }
 
   // frame the scene to the card's shape
@@ -566,6 +568,12 @@ export function mountHouse(container, opts = {}) {
       set("battery", battery, (battery || 0) >= 0);
       set("home", home, true);
       set("grid", grid, (grid || 0) >= 0);
+      if (flows.grid) {
+        const g = grid || 0;
+        const c = Math.abs(g) < 0.03 ? COL.grid : g > 0 ? GRID_IMPORT : GRID_EXPORT;  // > 0: importing
+        flows.grid.glow.material.color.set(c);
+        flows.grid.base.material.color.set(c);
+      }
       set("ev", evKw, true);
       const lit = Math.min(1, Math.max(0, (home || 0) / 3));
       glassM.emissiveIntensity = 0.15 + lit * 1.1;
